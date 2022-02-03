@@ -9,4 +9,6 @@ public interface MemberService {
 	
 	// 회원리스트 조회
 	List<MemberVO> getMemberList() throws SQLException;
+	
+	
 }
