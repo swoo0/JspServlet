@@ -6,8 +6,8 @@
 	<properties resource="com/jsp/properties/jdbc.properties" />
 	
 	<typeAliases>
-		<typeAlias type="java.long.String" alias="str" />
-		<typeAlias type="java.long.Integer" alias="int" />
+		<typeAlias type="java.lang.String" alias="str" />
+		<typeAlias type="java.lang.Integer" alias="int" />
 		
 		<typeAlias type="com.jsp.dto.MemberVO" alias="member" />
 	</typeAliases>
