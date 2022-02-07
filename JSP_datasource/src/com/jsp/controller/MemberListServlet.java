@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.jsp.dao.MemberDAO;
-import com.jsp.dao.MemberDAOImpl;
-import com.jsp.datasource.OracleMybatisSqlSessionFactory;
 import com.jsp.dto.MemberVO;
 import com.jsp.service.MemberService;
 import com.jsp.service.MemberServiceImpl;
@@ -37,19 +35,18 @@ public class MemberListServlet extends HttpServlet {
 			memberService = (MemberService) Class.forName(memberServiceStr).newInstance();
 			MemberDAO memberDAO = (MemberDAO) Class.forName(memberDAOStr).newInstance();
 			SqlSessionFactory sqlSessionFactory = (SqlSessionFactory) Class.forName(sqlSessionFactoryStr).newInstance();
+
+			if (memberService instanceof MemberServiceImpl) {
+				MemberServiceImpl memberServiceImpl = (MemberServiceImpl) memberService;
+				memberServiceImpl.setSqlSessionFactory(sqlSessionFactory);
+				memberServiceImpl.setMemberDAO(memberDAO);
+				
+				System.out.println("memberService injection clear!");
+			}
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		
-		
-		if (memberService instanceof MemberServiceImpl) {
-			MemberServiceImpl memberServiceImpl = (MemberServiceImpl) memberService;
-			memberServiceImpl.setSqlSessionFactory(sqlSessionFactory);
-//			((MemberServiceImpl) memberService).setSqlSessionFactory(sqlSessionFactory);
-			memberServiceImpl.setMemberDAO(memberDAO);
-			
-			System.out.println("memberService injection clear!");
-		}
 	}
 	
 	
