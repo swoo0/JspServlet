@@ -44,6 +44,7 @@ public class MemberListServlet extends HttpServlet {
 				System.out.println("memberService injection clear!");
 			}
 		} catch (Exception e) {
+			System.out.println("초기화 실패입니다.");
 			e.printStackTrace();
 		}
 		
