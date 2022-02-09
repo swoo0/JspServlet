@@ -12,4 +12,7 @@ public interface MemberDAO {
 	// 회원리스트 조회
 	List<MemberVO> selectMemberList(SqlSession session) throws SQLException;
 	
+	
+	// 회원정보 조회
+	MemberVO selectMemberById(SqlSession session, String id) throws SQLException;
 }

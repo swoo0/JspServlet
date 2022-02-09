@@ -9,7 +9,11 @@
 		from member
 	</select>
 
-
+	<select id="selectMemberById" parameterType="String" resultType="member">
+		select *
+		from member
+		where member_id = #{id }
+	</select>
 
 
 

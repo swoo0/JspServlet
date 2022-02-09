@@ -33,4 +33,17 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 
+	@Override
+	public MemberVO getMember(String id) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		
+		MemberVO member = null;
+		try {
+			member = memberDAO.selectMemberById(session, id);
+			return member;
+		} finally {
+			session.close();
+		}
+	}
+
 }

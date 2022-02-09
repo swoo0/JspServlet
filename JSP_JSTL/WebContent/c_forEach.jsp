@@ -25,19 +25,23 @@
 pageContext.getAttribute("sum") : <%=pageContext.getAttribute("sum") %> <br> --%>
 ＄{sum } : ${sum }
 
+<hr>
 <%
 	List<String> strList = new ArrayList<String>();
 	strList.add("a");
 	strList.add("b");
 	
 	if (strList != null) for (String str : strList) {
-		
+		out.println(str + "<br>");
 	}
 	
 %>
 
+<c:set var="strList" value="<%=strList %>" />
 
-
+<c:forEach items="${strList }" var="str" >
+	${str }<br>
+</c:forEach>
 
 
 

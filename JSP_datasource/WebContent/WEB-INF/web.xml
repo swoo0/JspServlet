@@ -10,6 +10,8 @@
 		<init-param>
 			<param-name>memberDAO</param-name>
 			<param-value>com.jsp.dao.MemberDAOImpl</param-value>
+<!-- 			<param-value>com.jsp.dao.MockMemberDAOImpl1</param-value> -->
+<!-- 			<param-value>com.jsp.dao.MockMemberDAOImpl2</param-value> -->
 		</init-param>
 		<init-param>
 			<param-name>memberService</param-name>
