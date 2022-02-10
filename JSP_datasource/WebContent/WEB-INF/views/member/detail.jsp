@@ -9,52 +9,65 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/dist/css/adminlte.min.css">
+
 <title></title>
 </head>
 <body>
 
-<h1>회원상세보기</h1>	
-	
-<hr>	
-
-<table border="1px">
-	<tr>
-		<td>아이디: </td>
-		<td>${member.id }</td>
-	</tr>
-	<tr>
-		<td>이름: </td>
-		<td>${member.name }</td>
-	</tr>
-	<tr>
-		<td>패스워드: </td>
-		<td>${member.pwd }</td>
-	</tr>
-	<tr>
-		<td>주소: </td>
-		<td>${member.address }</td>
-	</tr>
-	<tr>
-		<td>email: </td>
-		<td>${member.email }</td>
-	</tr>
-	<tr>
-		<td>전화번호: </td>
-		<td>${member.phone }</td>
-	</tr>
-
-<c:if test="${empty member }">
-	<tr>
-		<td colspan="6" style="text-align:center;">해당 내용이 없습니다.</td>
-	</tr>
-</c:if>
-
-</table>
-	<input type="button" value="수정" onclick="update_member('${member.id}')" />
-	 &nbsp;
-	<input type="button" value="삭제" onclick="delete_member('${member.id}')" /> 
-	 &nbsp;
-	<input type="button" value="목록" onclick="detail_close()" /> 
+	<div class="card" style="width:700px; margin: 10px">
+      <div class="card-header">
+        <h3 class="card-title" style="font-size: 30px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회원정보 상세보기</font></font></h3>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body" style="padding:15px 15px 10px 15px">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th style="width: 150px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">#</font></font></th>
+              <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">정보</font></font></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">아이디:</font></font></td>
+              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${member.id }</font></font></td>
+            </tr>
+            <tr>
+              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이름: </font></font></td>
+              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${member.name }</font></font></td>
+            </tr>
+            <tr>
+              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">패스워드: </font></font></td>
+              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${member.pwd }</font></font></td>
+            </tr>
+            <tr>
+              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">전화번호: </font></font></td>
+              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${member.phone }</font></font></td>
+            </tr>
+            <tr>
+              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">email: </font></font></td>
+              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${member.email }</font></font></td>
+            </tr>
+            <tr>
+              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주소: </font></font></td>
+              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${member.address }</font></font></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+	<div style="width: 210px; margin: 0px 0px 15px 15px">
+	  <div style="width: 100px; float: left" >
+	    <button type="button" class="btn btn-block bg-gradient-primary" onclick="update_member('${member.id }')">수정</button>
+	  </div>
+	  <div style="width: 100px; float: right">
+		<button type="button" class="btn btn-block bg-gradient-primary" onclick="delete_member('${member.id }')">삭제</button>
+	  </div>
+	</div>	
+    </div>
 
 
 
@@ -75,13 +88,11 @@ function detail_close() {
 	window.close();
 }
 
-
-
 </script>
 
-
-
-
+<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/adminlte.min.js"></script>
 
 </body>
 </html>

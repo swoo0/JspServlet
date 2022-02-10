@@ -9,97 +9,95 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <style>
 tr {
 	cursor: pointer;
 }
 </style>
 
+<script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/dist/css/adminlte.min.css">
+
 <title></title>
-
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/bootstrap/dist/css/adminlte.min.css">
-
 
 </head>
 <body>
 
-	<div class="col-12">
-		<div class="card">
-			<div class="card-header">
-				<h3 class="card-title">회원리스트</h3>
-
-				<div class="card-tools">
-					<div class="input-group input-group-sm" style="width: 150px;">
-						<input type="text" name="table_search"
-							class="form-control float-right" placeholder="Search">
-
-						<div class="input-group-append">
-							<button type="submit" class="btn btn-default">
-								<i class="fas fa-search"></i>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- /.card-header -->
-			<div class="card-body table-responsive p-0">
-				<table class="table table-hover text-nowrap">
-					<thead>
-						<tr>
-							<th>아이디</th>
-							<th>이름</th>
-							<th>패스워드</th>
-							<th>주소</th>
-							<th>email</th>
-							<th>전화번호</th>
-						</tr>
-					</thead>
-					<tbody>
-
-						<c:if test="${not empty memberList }">
-							<c:forEach items="${memberList }" var="member">
-								<tr onclick="detail('${member.id }');">
-									<td>${member.id }</td>
-									<td>${member.name }</td>
-									<td>${member.pwd }</td>
-									<td>${member.address }</td>
-									<td>${member.email }</td>
-									<td>${member.phone }</td>
-								</tr>
-							</c:forEach>
-						</c:if>
-
-					</tbody>
-				</table>
-			</div>
-			<!-- /.card-body -->
-		</div>
-		<!-- /.card -->
+	<div class="card">
+	  <div class="card-header">
+	    <h3 class="card-title" style="font-size: 30px">회원 리스트</h3>
+	  </div>
+	    
+	  <div style="margin: 10px; height: 30px" >
+	    <div style="width: 100px; float: left">
+          <button type="button" class="btn btn-block bg-gradient-primary" onclick="insert_member()">회원 등록</button>
+        </div>
+          
+        <div class="card-tools; float: right">
+          <div class="input-group input-group-sm" style="width: 300px; float: right">
+            <div class="form-group" style="height: 35px">
+              <select class="form-control" style="height: 35px">
+                <option>검색구분</option>
+                <option>아이디</option>
+                <option>이름</option>
+                <option>이메일</option>
+              </select>
+            </div>
+          <input type="text" name="table_search" class="form-control float-right" placeholder="Search" style="height: 35px">
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-default" style="height: 35px">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+	</div>
+	  <!-- /.card-header -->
+	  <div class="card-body" style="padding: 0.7rem;">
+	    <table class="table table-bordered">
+	      <thead>
+	        <tr>
+	          <th>아이디</th>
+	          <th>패스워드</th>
+	          <th>이름</th>
+	          <th>전화번호</th>
+	          <th>email</th>
+	          <th>주소</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+            <c:if test="${not empty memberList }">
+               <c:forEach items="${memberList }" var="member">
+                   <tr class="backColor" onclick="detail('${member.id }');">
+                       <td>${member.id }</td>
+                       <td>${member.name }</td>
+                       <td>${member.pwd }</td>
+                       <td>${member.address }</td>
+                       <td>${member.email }</td>
+                       <td>${member.phone }</td>
+                   </tr>
+               </c:forEach>
+           </c:if>
+	      </tbody>
+	    </table>
+	  </div>
+	  <!-- /.card-body -->
+	  <div class="card-footer clearfix">
+	    <ul class="pagination pagination-sm m-0 float-right">
+	      <li class="page-item"><a class="page-link" href="#">«</a></li>
+	      <li class="page-item"><a class="page-link" href="#">1</a></li>
+	      <li class="page-item"><a class="page-link" href="#">2</a></li>
+	      <li class="page-item"><a class="page-link" href="#">3</a></li>
+	      <li class="page-item"><a class="page-link" href="#">»</a></li>
+	    </ul>
+	  </div>
 	</div>
 
-
-
-	<input type="button" value="회원 등록" onclick="insert_member()" />
-
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<select name="searchType">
-		<option value="">검색구분</option>
-		<option value="id">아이디</option>
-		<option value="name">이름</option>
-		<option value="email">이메일</option>
-	</select>
-	<input type="text" value="" />
-	<button>검색</button>
-
-	
-
-
 	<script>
+	
 		function insert_member() {
 			window.open('insertMember', '700', '600')
 		}
@@ -107,6 +105,20 @@ tr {
 		function detail(member_id) {
 			window.open('detail?id=' + member_id, '700', '600')
 		}
+
+		
+		$(document).on('mouseover', '.backColor', function() {
+			$(this).css({
+				"background-color" : "lightgray"
+			});
+		});
+		$(document).on('mouseout', '.backColor', function() {
+			$(this).css({
+				"background-color" : "white"
+			});
+		});
+		
+		
 	</script>
 
 

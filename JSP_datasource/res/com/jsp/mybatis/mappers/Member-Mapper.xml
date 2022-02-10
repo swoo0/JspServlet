@@ -6,24 +6,24 @@
 	
 	<select id="selectMemberList" resultType="member">
 		select *
-		from member
+		from member2
 		order by regDate desc
 	</select>
 
 	<select id="selectMemberById" parameterType="member" resultType="member">
 		select *
-		from member
+		from member2
 		where id = #{id}
 	</select>
 
 	<insert id="insertMember" parameterType="member">
 		INSERT INTO
-		member (id, name, pwd, address, email, phone)
+		member2 (id, name, pwd, address, email, phone)
 		VALUES (#{id}, #{name}, #{pwd}, #{address}, #{email}, #{phone})
 	</insert>
 
 	<update id="updateMember" parameterType="member">
-		UPDATE member
+		UPDATE member2
 		set name = #{name},
 			pwd = #{pwd},
 			address = #{address},
@@ -34,7 +34,7 @@
 	
 	<update id="deleteMember" parameterType="str">
 		DELETE 
-		from member
+		from member2
 		where id = #{id}
 	</update>
 
