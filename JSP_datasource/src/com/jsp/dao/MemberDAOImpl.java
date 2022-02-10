@@ -25,4 +25,28 @@ public class MemberDAOImpl implements MemberDAO {
 		return member;
 	}
 
+	@Override
+	public int insertMember(SqlSession session, MemberVO mv) throws SQLException {
+		
+		int cnt = session.insert("Member-Mapper.insertMember", mv);
+		
+		return cnt;
+	}
+
+	@Override
+	public int updateMember(SqlSession session, MemberVO mv) throws SQLException {
+		
+		int cnt = session.update("Member-Mapper.updateMember", mv);
+		
+		return cnt;
+	}
+
+	@Override
+	public int deleteMember(SqlSession session, String id) throws SQLException {
+		
+		int cnt = session.delete("Member-Mapper.deleteMember", id);
+		
+		return cnt;
+	}
+
 }

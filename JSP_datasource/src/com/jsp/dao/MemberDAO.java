@@ -15,4 +15,14 @@ public interface MemberDAO {
 	
 	// 회원정보 조회
 	MemberVO selectMemberById(SqlSession session, String id) throws SQLException;
+	
+	// 회원정보 등록
+	int insertMember(SqlSession session, MemberVO mv) throws SQLException;
+
+	// 회원정보 수정
+	int updateMember(SqlSession session, MemberVO mv) throws SQLException;
+	
+	// 회원정보 삭제
+	int deleteMember(SqlSession session, String id) throws SQLException;
+	
 }

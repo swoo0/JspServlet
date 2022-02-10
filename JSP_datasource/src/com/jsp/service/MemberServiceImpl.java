@@ -36,8 +36,8 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberVO getMember(String id) throws SQLException {
 		SqlSession session = sqlSessionFactory.openSession();
-		
 		MemberVO member = null;
+		
 		try {
 			member = memberDAO.selectMemberById(session, id);
 			return member;
@@ -45,5 +45,41 @@ public class MemberServiceImpl implements MemberService {
 			session.close();
 		}
 	}
+
+	@Override
+	public void regist(MemberVO mv) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		
+		try {
+			memberDAO.insertMember(session, mv);
+		} finally {
+			session.close();
+		}
+		
+	}
+
+	@Override
+	public void modify(MemberVO mv) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		
+		try {
+			memberDAO.updateMember(session, mv);
+		} finally {
+			session.close();
+		}
+		
+	}
+
+	@Override
+	public void remove(String id) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+
+		try {
+			memberDAO.deleteMember(session, id);
+		} finally {
+			session.close();
+		}
+	}
+	
 
 }

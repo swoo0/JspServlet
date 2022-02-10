@@ -7,17 +7,36 @@
 	<select id="selectMemberList" resultType="member">
 		select *
 		from member
+		order by regDate desc
 	</select>
 
-	<select id="selectMemberById" parameterType="String" resultType="member">
+	<select id="selectMemberById" parameterType="member" resultType="member">
 		select *
 		from member
-		where member_id = #{id }
+		where id = #{id}
 	</select>
 
+	<insert id="insertMember" parameterType="member">
+		INSERT INTO
+		member (id, name, pwd, address, email, phone)
+		VALUES (#{id}, #{name}, #{pwd}, #{address}, #{email}, #{phone})
+	</insert>
 
-
-
+	<update id="updateMember" parameterType="member">
+		UPDATE member
+		set name = #{name},
+			pwd = #{pwd},
+			address = #{address},
+			email = #{email},
+			phone = #{phone}
+		where id = #{id}
+	</update>
+	
+	<update id="deleteMember" parameterType="str">
+		DELETE 
+		from member
+		where id = #{id}
+	</update>
 
 
 
