@@ -1,98 +1,133 @@
-<%@page import="com.jsp.dto.MemberVO"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/dist/css/adminlte.min.css">
-
 <title></title>
+
+
+<!-- Google Font: Source Sans Pro -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/dist/css/adminlte.min.css">
+
 </head>
 <body>
-
-	<div class="card" style="width:700px; margin: 10px">
-      <div class="card-header">
-        <h3 class="card-title" style="font-size: 30px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회원정보 상세보기</font></font></h3>
-      </div>
-      <!-- /.card-header -->
-      <div class="card-body" style="padding:15px 15px 10px 15px">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th style="width: 150px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">#</font></font></th>
-              <th><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">정보</font></font></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">아이디:</font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${member.id }</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">이름: </font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${member.name }</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">패스워드: </font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${member.pwd }</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">전화번호: </font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${member.phone }</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">email: </font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${member.email }</font></font></td>
-            </tr>
-            <tr>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">주소: </font></font></td>
-              <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">${member.address }</font></font></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-	<div style="width: 210px; margin: 0px 0px 15px 15px">
-	  <div style="width: 100px; float: left" >
-	    <button type="button" class="btn btn-block bg-gradient-primary" onclick="update_member('${member.id }')">수정</button>
-	  </div>
-	  <div style="width: 100px; float: right">
-		<button type="button" class="btn btn-block bg-gradient-primary" onclick="delete_member('${member.id }')">삭제</button>
-	  </div>
-	</div>	
-    </div>
-
-
-
-<script>
-
-function update_member(member_id) {
-	window.open('updateMember?id=' + member_id, '700', '600')
-}
-
-function delete_member(member_id) {
-	var str = confirm("정말 삭제하시겠습니까?");
-	if (str) {
-		location.href="deleteMember?id=" + member_id;
-	}
-}
-
-function detail_close() {
-	window.close();
-}
-
-</script>
-
-<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
-<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/adminlte.min.js"></script>
-
+	
+  <!-- Content Wrapper. Contains page content -->
+  <div >
+  	 <section class="content-header">
+	  	<div class="container-fluid">
+	  		<div class="row md-2">
+	  			<div class="col-sm-6">
+	  				<h1>상세페이지</h1>  				
+	  			</div>
+	  			<div class="col-sm-6">
+	  				<ol class="breadcrumb float-sm-right">
+			        <li class="breadcrumb-item">
+			        	<a href="#">
+				        	<i class="fa fa-dashboard">회원관리</i>
+				        </a>
+			        </li>
+			        <li class="breadcrumb-item active">
+			        	상세보기
+			        </li>		        
+	    	  </ol>
+	  			</div>
+	  		</div>
+	  	</div>
+  	</section>
+    <!-- Main content -->
+    <section class="content register-page">       
+		<div class="register-box">         
+	    	<form role="form" class="form-horizontal"  method="post">
+	    		<div class="register-card-header" >
+	    			<h1 class="text-center">회원 상세보기</h1>
+	    		</div>
+	        	<div class="register-card-body" >
+	            	<div class="row"  style="height:200px;">
+						<div class="mailbox-attachments clearfix col-md-12" style="text-align: center;">							
+							<div id="pictureView" data-id="${member.id }" style="border: 1px solid green; height: 200px; width: 140px; margin: 0 auto;"></div>														
+						</div>
+					</div>
+					<br />
+	                <div class="form-group row" >
+	                  <label for="inputEmail3" class="col-sm-3 control-label text-right">아이디</label>
+	
+	                  <div class="col-sm-9">
+	                    <input name="id" type="text" class="form-control" id="inputEmail3"  value="${member.id }" readonly>
+	                  </div>
+	                </div>	               
+	                <div class="form-group row">
+	                  <label for="inputPassword3" class="col-sm-3 control-label text-right">이  름</label>
+	
+	                  <div class="col-sm-9">
+	                    <input name="pwd" type="text" class="form-control" id="inputPassword3" value="${member.name }" readonly>
+	                  </div>
+	                </div>
+	                 <div class="form-group row">
+	                  <label for="inputPassword3" class="col-sm-3 control-label text-right">이메일</label>
+	
+	                  <div class="col-sm-9">
+	                    <input name="email" type="email" class="form-control" id="inputPassword3" value="${member.email }" readonly>
+	                  </div>
+	                </div>
+	                 <div class="form-group row">
+	                  <label for="inputPassword3" class="col-sm-3 control-label text-right">전화번호</label>
+	                  <div class="col-sm-9">   
+	                  	<input name="phone" type="text" class="form-control" id="inputPassword3" value="${member.phone }" readonly>	                
+	                  </div>                  
+	                </div>               
+	              </div>  
+		          <div class="card-footer" style="padding:5px 0;" >
+		          		<div class="row">
+		          	<%-- 	<c:if test="${loginUser.id eq member.id }"> --%>
+			          		<div class="col-sm-3 text-center">
+			          			<button type="button" onclick="location.href='modifyForm.do?id=${member.id}';" id="modifyBtn" class="btn btn-warning ">수 정</button>
+			          		</div>
+		          		
+			          		<div class="col-sm-3 text-center">
+			          			<button type="button" onclick="location.href='remove.do?id=${member.id}';" 
+			          			id="deleteBtn" class="btn btn-danger" >삭 제</button>
+			          		</div>
+		          			
+			          		<div class="col-sm-3 text-center">
+			          			<c:if test="${member.enabled ne 0 }">
+			          			<button type="button" onclick="location.href='stop.do?id=${member.id}';" 
+			          			id="stopBtn" class="btn btn-info" >비활성</button>
+			          			</c:if>
+			          			<c:if test="${member.enabled eq 0 }">
+			          			<button type="button" onclick="location.href='active.do?id=${member.id}';" 
+			          			id="activeBtn" class="btn btn-info" >활&nbsp;&nbsp;성</button>
+			          			</c:if>
+			          		</div>
+		          		<%-- </c:if> --%>
+		          	
+			          		<div class="col-sm-3 text-center">
+			            		<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-primary pull-right">닫 기</button>
+			            	</div>
+		          	    </div>  	
+		          </div>
+	      	  </form>
+      	  </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+  
+<!-- jQuery -->
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="<%=request.getContextPath() %>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="<%=request.getContextPath() %>/resources/bootstrap/dist/js/adminlte.min.js"></script>
 </body>
 </html>
