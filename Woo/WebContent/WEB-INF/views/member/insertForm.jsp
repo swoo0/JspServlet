@@ -51,7 +51,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="이름" name="name" id="checkName" required="required" pattern="^[가-힣]{2,5}$">
+          <input type="text" autocomplete="off" class="form-control" placeholder="이름" name="name" id="checkName" required="required" pattern="^[가-힣]{2,5}$">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -66,6 +66,9 @@
             </div>
           </div>
         </div>
+
+<!-- 		<input type="text" class="form-control is-valid" id="inputSuccess" placeholder="Enter ..."> -->
+
 
         <div class="input-group mb-3">
           <input type="email" class="form-control" placeholder="이메일" name="email" id="checkEmail" required="required" pattern="^[0-9a-zA-Z]+@[0-9a-zA-Z]+(\.[a-z]+){1,2}$">
