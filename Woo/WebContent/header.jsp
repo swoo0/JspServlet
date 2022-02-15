@@ -2,8 +2,4 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-
-	<h1>header.jsp</h1>
-	<hr/>
-
-	
+<h1>header.jsp</h1>

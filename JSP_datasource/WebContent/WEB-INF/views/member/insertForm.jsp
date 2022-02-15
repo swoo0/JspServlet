@@ -12,7 +12,6 @@
 
 <title></title>
 </head>
-<body>
 	
 <body class="register-page" style="min-height: 570.8px;">
 <div class="register-box">
@@ -34,6 +33,7 @@
             </div>
           </div>
         </div>
+        
         <div class="input-group mb-3">
           <input type="password" class="form-control" placeholder="비밀번호" name="pwd" id="checkPwd" required="required" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()_+|]).{8,}$">
           <div class="input-group-append">
@@ -42,6 +42,7 @@
             </div>
           </div>
         </div>
+        
         <div class="input-group mb-3">
           <input type="password" class="form-control" placeholder="비밀번호 재입력" name="pwd2" id="checkPwd2" required="required" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#$%^&*()_+|]).{8,}$">
           <div class="input-group-append">
@@ -50,6 +51,7 @@
             </div>
           </div>
         </div>
+        
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="이름" name="name" id="checkName" required="required" pattern="^[가-힣]{2,5}$">
           <div class="input-group-append">
@@ -58,6 +60,7 @@
             </div>
           </div>
         </div>
+        
         <div class="input-group mb-3">
           <input type="tel" class="form-control" placeholder="전화번호" name="phone" id="checkPhone" required="required" pattern="^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$">
           <div class="input-group-append">
@@ -75,6 +78,7 @@
             </div>
           </div>
         </div>
+        
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="주소" name="address" id="checkAddr" required="required">
           <div class="input-group-append">
@@ -117,6 +121,7 @@
 </div>
 <!-- /.register-box -->
 
+
 <script>
 	
 	
@@ -152,6 +157,7 @@
 // 			"형식에 맞게 입력하세요";
 		
 	
+
 </script>
 
 	
@@ -159,7 +165,6 @@
 <script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/adminlte.min.js"></script>	
 
-<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div></body>
 	
 	
 </body>

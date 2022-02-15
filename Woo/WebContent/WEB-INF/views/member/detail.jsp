@@ -5,19 +5,11 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<!DOCTYPE html>
-<html>
+<title>detail</title>
 <head>
-<meta charset="UTF-8">
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/dist/css/adminlte.min.css">
-
-<title></title>
 </head>
-<body>
 
+<body>
 	<div class="card" style="width:700px; margin: 10px">
       <div class="card-header">
         <h3 class="card-title" style="font-size: 30px"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회원정보 상세보기</font></font></h3>
@@ -59,40 +51,31 @@
           </tbody>
         </table>
       </div>
-	<div style="width: 210px; margin: 0px 0px 15px 15px">
-	  <div style="width: 100px; float: left" >
-	    <button type="button" class="btn btn-block bg-gradient-primary" onclick="update_member('${member.id }')">수정</button>
-	  </div>
-	  <div style="width: 100px; float: right">
-		<button type="button" class="btn btn-block bg-gradient-primary" onclick="delete_member('${member.id }')">삭제</button>
-	  </div>
-	</div>	
+	  <div style="width: 210px; margin: 0px 0px 15px 15px">
+	    <div style="width: 100px; float: left" >
+	      <button type="button" class="btn btn-block bg-gradient-primary" onclick="update_member('${member.id }')">수정</button>
+	    </div>
+	    <div style="width: 100px; float: right">
+	  	<button type="button" class="btn btn-block bg-gradient-primary" onclick="delete_member('${member.id }')">삭제</button>
+	    </div>
+	  </div>	
     </div>
 
-
-
-<script>
-
-function update_member(member_id) {
-	window.open('updateMember?id=' + member_id, '700', '600')
-}
-
-function delete_member(member_id) {
-	var str = confirm("정말 삭제하시겠습니까?");
-	if (str) {
-		location.href="deleteMember?id=" + member_id;
-	}
-}
-
-function detail_close() {
-	window.close();
-}
-
-</script>
-
-<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
-<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/adminlte.min.js"></script>
+	<script>
+		function update_member(member_id) {
+			window.open('updateMember?id=' + member_id, '700', '600')
+		}
+		
+		function delete_member(member_id) {
+			var str = confirm("정말 삭제하시겠습니까?");
+			if (str) {
+				location.href="deleteMember?id=" + member_id;
+			}
+		}
+		
+		function detail_close() {
+			window.close();
+		}
+	</script>
 
 </body>
-</html>
