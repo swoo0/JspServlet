@@ -15,7 +15,7 @@
 </head>
 <body>
 	
-	<div class="card card-info">
+	<div class="card card-primary">
 	  <div class="card-header">
 	    <h3 class="card-title">회원 정보 수정</h3>
 	  </div>
@@ -77,7 +77,7 @@
 	    </div>
 	    <!-- /.card-body -->
 	    <div class="card-footer">
-	      <button type="submit" class="btn btn-info">수정</button>
+	      <button type="submit" class="btn btn-primary">수정</button>
 	      <button type="submit" class="btn btn-default float-right" onclick="window.close()">Cancel</button>
 	    </div>
 	    <!-- /.card-footer -->

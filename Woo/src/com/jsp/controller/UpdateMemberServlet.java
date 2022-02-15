@@ -104,4 +104,5 @@ public class UpdateMemberServlet extends HttpServlet {
 		resp.sendRedirect(url); // 목록조회 화면으로 리다이렉트
 		
 	}
+	
 }
