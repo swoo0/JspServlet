@@ -2,4 +2,4 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<h1>header.jsp</h1>
+<h1 style="background-color: skyblue; text-align:center;">header</h1>

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> <decorator:title default="Woo" /> </title>
+<title><decorator:title default="Woo" /></title>
 
 <!-- jQuery -->
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>

@@ -6,7 +6,9 @@
 <head>
 </head>
 	
-<body class="register-page" style="min-height: 570.8px;">
+<body>
+
+<div class="register-page" style="min-height: 570.8px;">
   <div class="register-box">
     <div class="register-logo">
       <a href="#"><b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회원 등록</font></font></b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></a>
@@ -106,6 +108,7 @@
 
     </div><!-- /.card -->
   </div><!-- /.register-box -->
+</div><!-- register-page -->
 
 <script>
 </script>

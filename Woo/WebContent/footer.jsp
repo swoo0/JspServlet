@@ -2,4 +2,4 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<h1>footer.jsp</h1>
+<h1 style="background-color: lightgray; text-align:center;">footer</h1>
