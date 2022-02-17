@@ -1,5 +1,7 @@
 package dto;
 
+import java.sql.Date;
+
 public class MemberVO {
 	
 	private String id;
@@ -10,7 +12,7 @@ public class MemberVO {
 	private String gender;
 	private String country;
 	private String city;
-	private String restate;
+	private Date restate;
 	
 	public String getId() {
 		return id;
@@ -60,11 +62,12 @@ public class MemberVO {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public String getRestate() {
+	public Date getRestate() {
 		return restate;
 	}
-	public void setRestate(String restate) {
+	public void setRestate(Date restate) {
 		this.restate = restate;
 	}
+	
 	
 }
