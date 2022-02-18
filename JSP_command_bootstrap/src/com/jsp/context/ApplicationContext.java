@@ -12,4 +12,8 @@ public class ApplicationContext {
 	public static Map<String, Object> getApplicationContext() {
 		return container;
 	}
+	
+	
+	
+	
 }

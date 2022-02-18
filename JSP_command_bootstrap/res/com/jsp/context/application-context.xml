@@ -1,11 +1,11 @@
 
 <beans>
-	<bean> <!-- class -->
-		<property></property> <!-- setter -->
-	</bean>
-	
+<!-- 	<bean> class -->
+<!-- 		<property></property> setter -->
+<!-- 	</bean> -->
+
 	<!-- dataSource -->
-	<bean id="sqlSessionFactory" class="com.jsp.dataSource.OracleMyBatisSqlSessionFactory" />
+	<bean id="sqlSessionFactory" class="com.jsp.datasource.OracleMybatisSqlSessionFactory" />
 	
 	<!-- Repository Layer -->
 	<bean id="menuDAO" class="com.jsp.dao.MenuDAOImpl" />
