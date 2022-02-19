@@ -7,7 +7,7 @@
 	<select id="selectMemberList" resultType="member">
 		SELECT *
 		FROM SMEMBER
-		ORDER BY RESTATE DESC
+		ORDER BY REGDATE DESC
 	</select>
 	
 </mapper>

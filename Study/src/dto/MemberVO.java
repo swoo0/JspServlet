@@ -12,7 +12,7 @@ public class MemberVO {
 	private String gender;
 	private String country;
 	private String city;
-	private Date restate;
+	private Date regdate;
 	
 	public String getId() {
 		return id;
@@ -62,11 +62,11 @@ public class MemberVO {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public Date getRestate() {
-		return restate;
+	public Date getRegdate() {
+		return regdate;
 	}
-	public void setRestate(Date restate) {
-		this.restate = restate;
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
 	}
 	
 	
