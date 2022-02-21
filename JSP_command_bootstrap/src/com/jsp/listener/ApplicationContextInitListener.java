@@ -39,7 +39,7 @@ public class ApplicationContextInitListener implements ServletContextListener {
     		return;
     	
     	beanConfigXml = ctx.getRealPath("/") + beanConfigXml.replace("classpath:", "WEB-INF/classes/").replace("/", File.separator);
-    	System.out.println(beanConfigXml);
+//    	System.out.println(beanConfigXml);
     /*	
     	톰캣 내부의 배포 폴더 wtpwebapps(RealPath) 안에 이클립스에서 서버에 add 한 프로젝트가 담긴다. 
     	
@@ -84,7 +84,7 @@ public class ApplicationContextInitListener implements ServletContextListener {
 					Object targetObj = cls.newInstance(); // single tone
 					applicationContext.put(id, targetObj);
 					
-//					System.out.println("id : " + id + ", class : " + targetObj);
+					System.out.println("id : " + id + ", class : " + targetObj);
 				}
 			}
 			
