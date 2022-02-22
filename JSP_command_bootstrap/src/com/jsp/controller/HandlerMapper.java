@@ -48,8 +48,7 @@ public class HandlerMapper {
 
 						method.invoke(commandAction, ApplicationContext.getApplicationContext().get(paramType));
 
-						System.out.println(
-								"[HandlerMapper:invoke]" + ApplicationContext.getApplicationContext().get(paramType));
+						System.out.println("[HandlerMapper:invoke]" + ApplicationContext.getApplicationContext().get(paramType));
 					}
 				}
 				commandMap.put(command, commandAction);
