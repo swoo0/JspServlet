@@ -94,11 +94,12 @@
 	
 	<script>
 		function insert_member() {
-			window.open('insertMember', '800', '700', '')
+			window.open('insertForm.do', '800', '700', '')
 		}
 
 		function detail(member_id) {
-			window.open('detail?id=' + member_id, '800', '700', '')
+			window.open('detail.do?id=' + member_id, '800', '700', '')
+// 			window.open('detail.do', '800', '700', '')
 		}
 
 		
