@@ -18,7 +18,7 @@
       <div class="card-body register-card-body">
 <!--         <p class="login-box-msg"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">회원 등록</font></font></p> -->
       
-        <form action="insertMember" method="post">
+        <form action="insert.do" method="post">
         
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="아이디" name="id" id="checkId" required title="영문, 숫자, 4~8자리 입력가능" pattern="^[a-zA-Z][a-zA-Z0-9]{3,7}$">

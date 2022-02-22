@@ -14,7 +14,7 @@
 	  </div>
 	  <!-- /.card-header -->
 	  <!-- form start -->
-	  <form class="form-horizontal" action="updateMember" method="post">
+	  <form class="form-horizontal" action="update.do" method="post">
 	    <div class="card-body" style="padding:15px 15px 0px 20px">
 	    
 	      <div class="form-group row">

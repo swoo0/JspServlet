@@ -7,7 +7,7 @@
 	<select id="selectMemberList" resultType="member">
 		select *
 		from member
-		order by regDate desc
+		order by regdate desc
 	</select>
 
 	<select id="selectMemberById" parameterType="member" resultType="member">

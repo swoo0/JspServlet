@@ -5,6 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface Action {
 	
-	public String process(HttpServletRequest req, HttpServletResponse reps) throws Exception; 
+	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception; 
 	
 }

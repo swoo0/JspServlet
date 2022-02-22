@@ -12,25 +12,29 @@ import com.jsp.dto.MemberVO;
 public class MemberServiceImpl implements MemberService {
 
 	private SqlSessionFactory sqlSessionFactory;
+	
 	public void setSqlSessionFactory (SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory = sqlSessionFactory;
 	}
 	
 	private MemberDAO memberDAO;
+	
 	public void setMemberDAO(MemberDAO memberDAO) {
 		this.memberDAO = memberDAO;
 	}
 	
 	@Override
 	public List<MemberVO> getMemberList() throws SQLException {
+		
+		List<MemberVO> memberList = null;
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
-			List<MemberVO> memberList = memberDAO.selectMemberList(session);
-			return memberList;
+			memberList = memberDAO.selectMemberList(session);
 		} finally {
 			session.close();
 		}
 		
+		return memberList;
 	}
 
 	@Override

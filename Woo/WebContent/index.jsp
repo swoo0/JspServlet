@@ -2,4 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 
-<h1 style="background-color: skyblue; text-align:center;">header</h1>
+<script>
+	location.href="/index.do";
+</script>
