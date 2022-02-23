@@ -6,14 +6,20 @@
 
 	<!-- dataSource -->
 	<bean id="sqlSessionFactory" class="com.jsp.datasource.OracleMybatisSqlSessionFactory" />
-	
+
 	<!-- Repository Layer -->
 	<bean id="menuDAO" class="com.jsp.dao.MenuDAOImpl" />
+	<bean id="memberDAO" class="com.jsp.dao.MemberDAOImpl" />
 	
 	<!-- Service Layer -->
 	<bean id="menuService" class="com.jsp.service.MenuServiceImpl">
 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
 		<property name="menuDAO" ref-value="menuDAO" />
+	</bean>
+	
+	<bean id="memberService" class="com.jsp.service.MemberServiceImpl">
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
+		<property name="memberDAO" ref-value="memberDAO" />
 	</bean>
 	
 	

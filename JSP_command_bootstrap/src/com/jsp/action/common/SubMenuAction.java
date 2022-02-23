@@ -6,10 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jsp.action.Action;
+import com.jsp.controller.JSONViewResolver;
 import com.jsp.dto.MenuVO;
 import com.jsp.service.MenuService;
 
-public class IndexPageAction implements Action {
+public class SubMenuAction implements Action {
 
 	private MenuService menuService;
 	public void setMenuService(MenuService menuService) {
@@ -18,22 +19,19 @@ public class IndexPageAction implements Action {
 	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		String url = "common/indexPage";
+		String url = null;
 		
 		String mCode = req.getParameter("mCode");
-		
-		if (mCode == null) mCode = "M000000";
+		List<MenuVO> subMenu = null;
 		
 		try {
-			List<MenuVO> menuList = menuService.getMainMenuList();
-			req.setAttribute("menuList", menuList);
+			subMenu = menuService.getSubMenuList(mCode);
 			
-			MenuVO menu = menuService.getMenuByMcode(mCode);
-			req.setAttribute("menu", menu);
+			JSONViewResolver.view(resp, subMenu);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			// Exception 처리 : log 기록...
+			// Exception 처리.....
 			throw e;
 		}
 		

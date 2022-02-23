@@ -14,8 +14,8 @@
       
       <c:if test="${not empty menuList }">
       	<c:forEach items="${menuList }" var="menu">
-		  <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">
+		  <li class="nav-item d-none d-sm-inline-block ">
+            <a href="javascript:goPage('<%=request.getContextPath() %>${menu.murl }','${menu.mcode }');subMenu_go('${menu.mcode }');" class="nav-link">
               <i class="${menu.micon }"></i>${menu.mname }
             </a>
           </li>

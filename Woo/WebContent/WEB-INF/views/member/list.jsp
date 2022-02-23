@@ -64,18 +64,18 @@
 	        </tr>
 	      </thead>
 	      <tbody>
-            <c:if test="${not empty memberList }">
-               <c:forEach items="${memberList }" var="member">
-                   <tr class="backColor" style="cursor: pointer;" onclick="detail('${member.id }');">
-                       <td>${member.id }</td>
-                       <td>${member.name }</td>
-                       <td>${member.pwd }</td>
-                       <td>${member.address }</td>
-                       <td>${member.email }</td>
-                       <td>${member.phone }</td>
-                   </tr>
-               </c:forEach>
-           </c:if>
+            <tr class="backColor" style="cursor: pointer;" onclick="detail('${member.id }');">
+              <c:if test="${not empty memberList }">
+                <c:forEach items="${memberList }" var="member">
+                  <td>${member.id }</td>
+                  <td>${member.name }</td>
+                  <td>${member.pwd }</td>
+                  <td>${member.address }</td>
+                  <td>${member.email }</td>
+                  <td>${member.phone }</td>
+                </c:forEach>
+              </c:if>
+            </tr>
 	      </tbody>
 	    </table>
 	  </div> <!-- /.card-body end -->
