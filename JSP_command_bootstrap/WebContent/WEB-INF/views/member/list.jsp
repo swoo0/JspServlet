@@ -10,6 +10,7 @@
 <head></head>
 
 <body>
+
   <div>
 	<!-- Main content -->
 	<section class="content-header">
@@ -44,13 +45,11 @@
    					 	<!-- search bar -->
    					 	
    					 	<!-- sort num -->
-					  	<select class="form-control col-md-3" name="perPageNum" id="perPageNum"
-					  		onchange="list_go(1);">
+					  	<select class="form-control col-md-3" name="perPageNum" id="perPageNum" onchange="list_go(1);">
 					  		<option value="10" >정렬개수</option>
 					  		<option value="2" ${cri.perPageNum == 2 ? 'selected':''}>2개씩</option>
 					  		<option value="3" ${cri.perPageNum == 3 ? 'selected':''}>3개씩</option>
 					  		<option value="5" ${cri.perPageNum == 5 ? 'selected':''}>5개씩</option>
-					  		
 					  	</select>
 					  	
 					  	<!-- search bar -->
@@ -62,11 +61,9 @@
 						</select>
 	
 						<!-- keyword -->
-   					 	<input  class="form-control" type="text" name="keyword" 
-										placeholder="검색어를 입력하세요." value="${pageMaker.cri.keyword }"/>
+   					 	<input  class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value="${pageMaker.cri.keyword }"/>
 						<span class="input-group-append">
-							<button class="btn btn-primary" type="button" 
-									id="searchBtn" data-card-widget="search" onclick="list_go(1);">
+							<button class="btn btn-primary" type="button" id="searchBtn" data-card-widget="search" onclick="list_go(1);">
 								<i class="fa fa-fw fa-search"></i>
 							</button>
 						</span>
@@ -97,7 +94,7 @@
 		     			
 			     		<c:if test="${!empty memberList }">
 			     			<c:forEach items="${memberList }" var="member">
-		     					<tr onclick="OpenWindow('detail.do?id=${member.id }','','800','900';" style="cursor:pointer;")>
+		     					<tr onclick="OpenWindow('detail.do?id=${member.id }','','800','900';" style="cursor:pointer;");>
 				     				<td>${member.id }</td>
 				     				<td>${member.pwd }</td>
 				     				<td>${member.name }</td>
@@ -121,6 +118,4 @@
    	</section>
   </div>
   
-  
-
 </body>
