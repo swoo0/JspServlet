@@ -21,6 +21,11 @@
 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
 		<property name="memberDAO" ref-value="memberDAO" />
 	</bean>
+
+	<bean id="searchMemberService" class="com.jsp.service.SearchMemberServiceImpl">
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
+		<property name="memberDAO" ref-value="memberDAO" />
+	</bean>
 	
 	
 </beans>

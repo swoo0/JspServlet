@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.jsp.command.Criteria;
 import com.jsp.dao.MemberDAO;
 import com.jsp.dto.MemberVO;
 
@@ -24,12 +25,26 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public List<MemberVO> getMemberList() throws SQLException {
+	public List<MemberVO> getMemberList() throws Exception {
 		
 		List<MemberVO> memberList = null;
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
 			memberList = memberDAO.selectMemberList(session);
+		} finally {
+			session.close();
+		}
+		
+		return memberList;
+	}
+	
+	@Override
+	public List<MemberVO> getMemberList(Criteria cri) throws Exception {
+		
+		List<MemberVO> memberList = null;
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			memberList = memberDAO.selectMemberList(session, cri);
 		} finally {
 			session.close();
 		}
@@ -84,6 +99,8 @@ public class MemberServiceImpl implements MemberService {
 			session.close();
 		}
 	}
+
+
 	
 
 }

@@ -9,12 +9,12 @@
 
 <body>
 	
-	<iframe name="ifr" src="" frameborder="0" style="width:100%; height:85vh"></iframe>
+	<Iframe name="ifr" src="" frameborder="0" style="width:100%; height:85vh"></Iframe>
 	
 	<script>
 		function goPage(url, mCode) {
 			
-			$('iframe[name="ifr"]').attr("src",url);
+			$('Iframe[name="ifr"]').attr("src",url);
 
 			// HTML5 지원 브라우져에서 사용 가능
 			if (typeof(history.pushState) == 'function') {
@@ -62,7 +62,7 @@
 	 
 	<script>
 		window.onload = function() {
-			goPage('<%=request.getContextPath() %>${menu. murl}','${menu.mcode }');
+			goPage('<%=request.getContextPath() %>${menu.murl }','${menu.mcode }');
 			subMenu_go('${menu.mcode }'.substring(0, 3) + "0000");
 		}
 	</script>

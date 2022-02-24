@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.jsp.command.Criteria;
 import com.jsp.dto.MemberVO;
 
 public class MemberDAOImpl implements MemberDAO {
@@ -13,6 +14,14 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<MemberVO> selectMemberList(SqlSession session) throws SQLException {
 		
 		List<MemberVO> memberList = session.selectList("Member-Mapper.selectMemberList");
+		
+		return memberList;
+	}
+	
+	@Override
+	public List<MemberVO> selectMemberList(SqlSession session, Criteria cri) throws Exception {
+		
+		List<MemberVO> memberList = session.selectList("Member-Mapper.selectMemberList", cri);
 		
 		return memberList;
 	}
@@ -48,5 +57,7 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		return cnt;
 	}
+
+
 
 }

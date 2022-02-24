@@ -3,12 +3,14 @@ package com.jsp.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.jsp.command.Criteria;
 import com.jsp.dto.MemberVO;
 
 public interface MemberService {
 	
 	// 회원리스트 조회
-	List<MemberVO> getMemberList() throws SQLException;
+	List<MemberVO> getMemberList() throws Exception;
+	List<MemberVO> getMemberList(Criteria cri) throws Exception;
 	
 	// 회원정보 조회
 	MemberVO getMember(String id) throws SQLException;

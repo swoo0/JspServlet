@@ -5,43 +5,58 @@
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html>
+<title>list</title>	
 <head>
-<meta charset="UTF-8">
-
-<script src="<%=request.getContextPath()%>/resources/js/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/dist/css/adminlte.min.css">
-
-<title></title>
-
 </head>
+
 <body>
+
+	<!-- Main content -->
+	<section class="content-header">
+	  	<div class="container-fluid">
+	  		<div class="row md-2">
+	  			<div class="col-sm-6">
+	  				<h1>회원목록</h1>  				
+	  			</div>
+	  			<div class="col-sm-6">
+	  				<ol class="breadcrumb float-sm-right">
+				        <li class="breadcrumb-item">
+				        	<a href="list.do">
+					        	<i class="fa fa-dashboard"></i>회원관리
+					        </a>
+				        </li>
+				        <li class="breadcrumb-item active">
+				        	목록
+				        </li>		        
+	    	  		</ol>
+	  			</div>
+	  		</div>
+	  	</div>
+	</section>
 
 	<div class="card">
 	  <div class="card-header">
-	  	<div class="row mb-2">
-	  	  <div class="col-sm-12">
-	    	<h3 class="card-title" style="font-size: 30px">회원 리스트</h3>
-		  </div>
-		</div>
-
-		<hr>
 		
 	  	<div class="row mb-2" style="height:30px">
-	  	
 	  	  <div class="col-sm-2">
 		    <div style="width: 100px;">
-		      <button type="button" class="btn btn-block bg-gradient-primary" onclick="insert_member()">회원 등록</button>
+		      <button type="button" class="btn btn-block bg-gradient-primary" onclick="OpenWindow('registForm.do?cw=t','회원등록',800,800);">회원 등록</button>
 		    </div>
 	      </div>  
-	     
 	      <div class="col-sm-10">  
 		    <div class="card-tools" style="float:right">
 		      <div class="input-group input-group-sm" style="width: 300px;">
 		        <div class="form-group" style="height: 35px">
+		        
+		          <!-- sort num -->
+		          <select class="form-control" style="height: 35px">
+		            <option>정렬개수</option>
+		            <option>2개</option>
+		            <option>3개</option>
+		            <option>5개</option>
+		          </select>
+		          
+		          <!-- search bar -->
 		          <select class="form-control" style="height: 35px">
 		            <option>검색구분</option>
 		            <option>아이디</option>
@@ -49,6 +64,7 @@
 		            <option>이메일</option>
 		          </select>
 		        </div>
+		        <!-- keyword -->
 		        <input type="text" name="table_search" class="form-control" placeholder="Search" style="height: 35px">
 		        <div class="input-group-append">
 		          <button type="submit" class="btn btn-default" style="height: 35px">
@@ -58,13 +74,10 @@
 		      </div>
 		    </div>
 	  	  </div>
-	  	  
 	  	</div>
-	  	  
+	  	
 	  </div> <!-- card-header end -->
-	</div> <!-- card end -->
 	    
-	  <!-- /.card-header -->
 	  <div class="card-body" style="padding: 0.7rem;">
 	    <table class="table table-bordered">
 	      <thead>
@@ -79,21 +92,21 @@
 	      </thead>
 	      <tbody>
             <c:if test="${not empty memberList }">
-               <c:forEach items="${memberList }" var="member">
-                   <tr class="backColor" style="cursor: pointer;" onclick="detail('${member.id }');">
-                       <td>${member.id }</td>
-                       <td>${member.name }</td>
-                       <td>${member.pwd }</td>
-                       <td>${member.address }</td>
-                       <td>${member.email }</td>
-                       <td>${member.phone }</td>
-                   </tr>
-               </c:forEach>
-           </c:if>
+              <c:forEach items="${memberList }" var="member">
+	            <tr class="backColor" style="cursor: pointer;" onclick="detail('${member.id }');">
+                  <td>${member.id }</td>
+                  <td>${member.pwd }</td>
+                  <td>${member.name }</td>
+                  <td>${member.email }</td>
+                  <td>${member.phone }</td>
+                  <td>${member.regDate }</td>
+          	    </tr>
+              </c:forEach>
+            </c:if>
 	      </tbody>
 	    </table>
-	  </div>
-	  <!-- /.card-body -->
+	  </div> <!-- /.card-body end -->
+	  
 	  <div class="card-footer clearfix">
 	    <ul class="pagination pagination-sm m-0 float-right">
 	      <li class="page-item"><a class="page-link" href="#">«</a></li>
@@ -102,16 +115,18 @@
 	      <li class="page-item"><a class="page-link" href="#">3</a></li>
 	      <li class="page-item"><a class="page-link" href="#">»</a></li>
 	    </ul>
-	  </div>
-
-	<script>
+	  </div><!-- card-footer end -->
 	
+	</div> <!-- card end -->
+	
+	<script>
 		function insert_member() {
-			window.open('insertMember', '700', '600')
+			window.open('insertForm.do', '800', '700', '')
 		}
 
 		function detail(member_id) {
-			window.open('detail?id=' + member_id, '700', '600')
+			window.open('detail.do?id=' + member_id, '800', '700', '')
+// 			window.open('detail.do', '800', '700', '')
 		}
 
 		
@@ -125,14 +140,6 @@
 				"background-color" : "white"
 			});
 		});
-		
-		
 	</script>
 
-
-	<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/jquery/jquery.min.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/bootstrap/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/bootstrap/dist/js/adminlte.min.js"></script>
-
 </body>
-</html>

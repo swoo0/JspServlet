@@ -8,7 +8,7 @@
 		select *
 		from menu
 		where mCode like '%'||'0000'||'%' 
-		order by mCode asc 
+		order by mCode
 	</select>
 	
 	<select id="selectSubMenu" resultType="menu">

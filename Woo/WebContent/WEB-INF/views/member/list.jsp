@@ -1,118 +1,149 @@
-<%@page import="com.jsp.dto.MemberVO"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    pageEncoding="UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<title>list</title>	
-<head>
-</head>
+
+
+<!-- iframe에 쏴주기 때문에 title는 적어도 의미가 없음 -->
+<title>회원목록</title>
+
+<head></head>
 
 <body>
-	<div class="card">
-	  <div class="card-header">
-	  
-	  	<div class="row mb-2">
-	  	  <div class="col-sm-12">
-	    	<h3 class="card-title" style="font-size: 30px">회원 리스트</h3>
-		  </div>
-		</div>
 
-		<hr>
-		
-	  	<div class="row mb-2" style="height:30px">
-	  	  <div class="col-sm-2">
-		    <div style="width: 100px;">
-		      <button type="button" class="btn btn-block bg-gradient-primary" onclick="insert_member()">회원 등록</button>
-		    </div>
-	      </div>  
-	      <div class="col-sm-10">  
-		    <div class="card-tools" style="float:right">
-		      <div class="input-group input-group-sm" style="width: 300px;">
-		        <div class="form-group" style="height: 35px">
-		          <select class="form-control" style="height: 35px">
-		            <option>검색구분</option>
-		            <option>아이디</option>
-		            <option>이름</option>
-		            <option>이메일</option>
-		          </select>
-		        </div>
-		        <input type="text" name="table_search" class="form-control" placeholder="Search" style="height: 35px">
-		        <div class="input-group-append">
-		          <button type="submit" class="btn btn-default" style="height: 35px">
-		            <i class="fas fa-search"></i>
-		          </button>
-		        </div>
-		      </div>
-		    </div>
-	  	  </div>
+  <div>
+	<!-- Main content -->
+	<section class="content-header">
+	  	<div class="container-fluid">
+	  		<div class="row md-2">
+	  			<div class="col-sm-6">
+	  				<h1>회원목록</h1>  				
+	  			</div>
+	  			<div class="col-sm-6">
+	  				<ol class="breadcrumb float-sm-right">
+				        <li class="breadcrumb-item">
+				        	<a href="list.do">
+					        	<i class="fa fa-dashboard"></i>회원관리
+					        </a>
+				        </li>
+				        <li class="breadcrumb-item active">
+				        	목록
+				        </li>		        
+	    	  		</ol>
+	  			</div>
+	  		</div>
 	  	</div>
-	  	
-	  </div> <!-- card-header end -->
-	    
-	  <div class="card-body" style="padding: 0.7rem;">
-	    <table class="table table-bordered">
-	      <thead>
-	        <tr>
-	          <th>아이디</th>
-	          <th>패스워드</th>
-	          <th>이름</th>
-	          <th>전화번호</th>
-	          <th>email</th>
-	          <th>주소</th>
-	        </tr>
-	      </thead>
-	      <tbody>
-            <tr class="backColor" style="cursor: pointer;" onclick="detail('${member.id }');">
-              <c:if test="${not empty memberList }">
-                <c:forEach items="${memberList }" var="member">
-                  <td>${member.id }</td>
-                  <td>${member.name }</td>
-                  <td>${member.pwd }</td>
-                  <td>${member.address }</td>
-                  <td>${member.email }</td>
-                  <td>${member.phone }</td>
-                </c:forEach>
-              </c:if>
-            </tr>
-	      </tbody>
-	    </table>
-	  </div> <!-- /.card-body end -->
-	  
-	  <div class="card-footer clearfix">
-	    <ul class="pagination pagination-sm m-0 float-right">
-	      <li class="page-item"><a class="page-link" href="#">«</a></li>
-	      <li class="page-item"><a class="page-link" href="#">1</a></li>
-	      <li class="page-item"><a class="page-link" href="#">2</a></li>
-	      <li class="page-item"><a class="page-link" href="#">3</a></li>
-	      <li class="page-item"><a class="page-link" href="#">»</a></li>
-	    </ul>
-	  </div><!-- card-footer end -->
+	</section>
+	 
+	 
+   	<section class="content">
+   		<div class="card">
+   			<div class="card-header with-border">
+   				<button type="button" class="btn btn-primary" onclick="OpenWindow('registForm.do?cw=t','회원등록',800,800);" >회원등록</button>
+   				<div id="keyword" class="card-tools" style="width:550px;">
+   					 <div class="input-group row">
+   					 	<!-- search bar -->
+   					 	
+   					 	<!-- sort num -->
+					  	<select class="form-control col-md-3" name="perPageNum" id="perPageNum" onchange="list_go(1);">
+					  		<option value="10" >정렬개수</option>
+					  		<option value="2" ${cri.perPageNum == 2 ? 'selected':''}>2개씩</option>
+					  		<option value="3" ${cri.perPageNum == 3 ? 'selected':''}>3개씩</option>
+					  		<option value="5" ${cri.perPageNum == 5 ? 'selected':''}>5개씩</option>
+					  	</select>
+					  	
+					  	<!-- search bar -->
+					 	<select class="form-control col-md-3" name="searchType" id="searchType">
+							<option value="" ${cri.searchType eq '' ? 'selected':''}>검색구분</option>
+							<option value="i" ${cri.searchType eq 'i' ? 'selected':''}>아이디</option>
+							<option value="p" ${cri.searchType eq 'p' ? 'selected':''}>전화번호</option>
+							<option value="e" ${cri.searchType eq 'e' ? 'selected':''}>이메일</option>
+						</select>
 	
-	</div> <!-- card end -->
-	
-	<script>
-		function insert_member() {
-			window.open('insertForm.do', '800', '700', '')
-		}
+						<!-- keyword -->
+   					 	<input class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value="${cri.keyword }"/>
+						<span class="input-group-append">
+							<button class="btn btn-primary" type="button" id="searchBtn" data-card-widget="search" onclick="list_go(1);">
+								<i class="fa fa-fw fa-search"></i>
+							</button>
+						</span>
+					 <!-- end : search bar -->		
+   					 </div>
+   				</div>   			
+   			</div>
+   			<div class="card-body" style="text-align:center; height:76vh">
+    		  <div class="row">
+	             <div class="col-sm-12">	
+		    		<table class="table table-bordered">
+		    			<tr>
+		                	<th>아이디</th>
+		                	<th>패스워드</th>
+		                	<th>이 름</th>
+		                	<th>이메일</th>
+		                	<th>전화번호</th>
+		                	<th>등록날짜</th> <!-- yyyy-MM-dd  -->
+		               	</tr>
 
-		function detail(member_id) {
-			window.open('detail.do?id=' + member_id, '800', '700', '')
-// 			window.open('detail.do', '800', '700', '')
-		}
-
-		
-		$(document).on('mouseover', '.backColor', function() {
-			$(this).css({
-				"background-color" : "lightgray"
-			});
-		});
-		$(document).on('mouseout', '.backColor', function() {
-			$(this).css({
-				"background-color" : "white"
-			});
-		});
-	</script>
-
+			     		<c:if test="${empty memberList }">
+			     			<tr>
+			     				<td colspan="6" class="text-center">
+			     					해당 내용이 없습니다.
+			     				</td>
+			     			</tr>	
+			     		</c:if>
+		     			
+			     		<c:if test="${!empty memberList }">
+			     			<c:forEach items="${memberList }" var="member">
+		     					<tr onclick="OpenWindow('detail.do?id=${member.id }','','800','900');" style="cursor:pointer;">
+				     				<td>${member.id }</td>
+				     				<td>${member.pwd }</td>
+				     				<td>${member.name }</td>
+				     				<td>${member.email }</td>
+				     				<td>${member.phone.replace('-','') }</td>
+				     				<td>
+				     					<fmt:formatDate value="${member.regDate }" pattern="yyyy-MM-dd" />
+				     				</td>
+		     					</tr>
+			     			</c:forEach>
+			     		</c:if>
+		        
+		            </table>
+    		     </div> <!-- col-sm-12 -->
+    	       </div> <!-- row -->
+    		</div> <!-- card-body -->
+    		<div class="card-footer">
+    			<!-- pagination -->
+<%--     			<%@ include file="/WEB-INF/views/common/pagination.jsp" %> --%>
+    		</div>
+	     </div>
+   	</section>
+  </div>
+  
+  <form id="jobForm">
+  	<input type="hidden" name="searchType" value="" />
+  	<input type="hidden" name="keyword" value="" />
+  </form>
+  
+  <script>
+  	function list_go(page, url) {
+  		
+  		if (!url) url = "list.do"; 
+  		
+  		console.log(url);
+  		
+  		var jobForm = $('#jobForm');
+  		
+  		jobForm.find("[name='searchType']").val($('select[name="searchType"]').val());
+  		jobForm.find("[name='keyword']").val($('div.input-group>input[name="keyword"]').val());
+  		
+  		jobForm.attr({
+  			action:url,
+  			method:'get'
+  		}).submit();
+  		
+	}
+  </script>
+  
 </body>

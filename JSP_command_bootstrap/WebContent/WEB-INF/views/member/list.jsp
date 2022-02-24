@@ -4,6 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<c:set var="pageMaker" value="${dataMap.pageMaker }" />
+<c:set var="cri" value="${dataMap.pageMaker.cri }" />
+<c:set var="memberList" value="${dataMap.memberList }" />
+
+
 <!-- iframe에 쏴주기 때문에 title는 적어도 의미가 없음 -->
 <title>회원목록</title>
 
@@ -61,7 +66,7 @@
 						</select>
 	
 						<!-- keyword -->
-   					 	<input  class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value="${pageMaker.cri.keyword }"/>
+   					 	<input class="form-control" type="text" name="keyword" placeholder="검색어를 입력하세요." value="${cri.keyword }"/>
 						<span class="input-group-append">
 							<button class="btn btn-primary" type="button" id="searchBtn" data-card-widget="search" onclick="list_go(1);">
 								<i class="fa fa-fw fa-search"></i>
@@ -71,7 +76,7 @@
    					 </div>
    				</div>   			
    			</div>
-   			<div class="card-body" style="text-align:center;">
+   			<div class="card-body" style="text-align:center; height:76vh">
     		  <div class="row">
 	             <div class="col-sm-12">	
 		    		<table class="table table-bordered">
@@ -94,7 +99,7 @@
 		     			
 			     		<c:if test="${!empty memberList }">
 			     			<c:forEach items="${memberList }" var="member">
-		     					<tr onclick="OpenWindow('detail.do?id=${member.id }','','800','900';" style="cursor:pointer;");>
+		     					<tr onclick="OpenWindow('detail.do?id=${member.id }','','800','900');" style="cursor:pointer;">
 				     				<td>${member.id }</td>
 				     				<td>${member.pwd }</td>
 				     				<td>${member.name }</td>
@@ -113,6 +118,7 @@
     		</div> <!-- card-body -->
     		<div class="card-footer">
     			<!-- pagination -->
+    			<%@ include file="/WEB-INF/views/common/pagination.jsp" %>
     		</div>
 	     </div>
    	</section>

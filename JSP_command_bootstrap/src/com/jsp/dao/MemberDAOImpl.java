@@ -5,20 +5,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 
+import com.jsp.command.Criteria;
 import com.jsp.dto.MemberVO;
 
 public class MemberDAOImpl implements MemberDAO {
 
 	@Override
+	public List<MemberVO> selectMemberList(SqlSession session, Criteria cri) throws Exception {
+		
+		int offset = cri.getStartRowNum();
+		int limit = cri.getPerPageNum();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		List<MemberVO> memberList = session.selectList("Member-Mapper.selectSearchMemberList", cri, rowBounds);
+		
+		return memberList;
+	}
+	
+	@Override
 	public List<MemberVO> selectMemberList(SqlSession session) throws Exception {
-		List<MemberVO> memberList  
-			= session.selectList("Member-Mapper.selectMemberList");
+		List<MemberVO> memberList = session.selectList("Member-Mapper.selectMemberList");
 			
 		return memberList;
 	}
-
 	
 	@Override
 	public int selectMemberListCount(SqlSession session) throws Exception {
@@ -27,6 +39,12 @@ public class MemberDAOImpl implements MemberDAO {
 		return totalCount;
 	}
 
+	@Override
+	public int selectMemberListCount(SqlSession session, Criteria cri) throws Exception {
+		int totalCount = session.selectOne("Member-Mapper.selectSearchMemberListCount", cri);
+		
+		return totalCount;
+	}
 
 	@Override
 	public MemberVO selectMemberById(SqlSession session, String id) throws SQLException {
