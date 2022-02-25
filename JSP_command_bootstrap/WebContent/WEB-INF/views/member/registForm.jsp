@@ -60,9 +60,7 @@
 							 <label for="id" class="col-sm-3" style="font-size:0.9em;" >
 							 	<span style="color:red;font-weight:bold;">*</span>아이디</label>	
 							<div class="col-sm-9 input-group input-group-sm">
-								<input name="id" 
-									onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);"
-								type="text" class="form-control" id="id" placeholder="13글자 영문자,숫자 조합">
+								<input name="id" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" type="text" class="form-control" id="id" placeholder="13글자 영문자,숫자 조합">
 								<span class="input-group-append-sm">	
 									<button type="button" onclick="idCheck_go();"  class="btn btn-info btn-sm btn-append">중복확인</button>
 								</span>								
@@ -72,8 +70,7 @@
 							<label for="pwd" class="col-sm-3" style="font-size:0.9em;">
 								<span style="color:red;font-weight:bold;">*</span>패스워드</label>
 							<div class="col-sm-9 input-group-sm">								
-								<input class="form-control" name="pwd" type="password" class="form-control" id="pwd"
-										placeholder="20글자 영문자,숫자,특수문자 조합" />
+								<input class="form-control" name="pwd" type="password" class="form-control" id="pwd" placeholder="20글자 영문자,숫자,특수문자 조합" />
 							</div>
 							
 						</div>
@@ -81,9 +78,7 @@
 							<label for="name" class="col-sm-3" style="font-size:0.9em;">
 								<span style="color:red;font-weight:bold;">*</span>이 름</label>
 							<div class="col-sm-9 input-group-sm">								
-								<input class="form-control" name="name" type="text" class="form-control" id="name"
-										placeholder="이름을 입력하세요"
-										onkeyup="this.value=this.value.trim();" />
+								<input class="form-control" name="name" type="text" class="form-control" id="name" placeholder="이름을 입력하세요" onkeyup="this.value=this.value.trim();" />
 							</div>
 							
 						</div>		
@@ -100,8 +95,7 @@
 						<div class="form-group row">
 							<label for="email" class="col-sm-3" style="font-size:0.9em;">이메일</label>
 							<div class="col-sm-9 input-group-sm">
-								<input name="email" type="email" class="form-control" id="email"
-										placeholder="example@naver.com">
+								<input name="email" type="email" class="form-control" id="email" placeholder="example@naver.com">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -130,8 +124,7 @@
 							 	</div>
 							 	
 							 	<div class="col-sm-6">
-									<button type="button" id="cancelBtn" onclick="CloseWindow();"
-										class="btn btn-default float-right">&nbsp;&nbsp;&nbsp;취 &nbsp;&nbsp;소&nbsp;&nbsp;&nbsp;</button>
+									<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-default float-right">&nbsp;&nbsp;&nbsp;취 &nbsp;&nbsp;소&nbsp;&nbsp;&nbsp;</button>
 								</div>
 							
 							</div>
@@ -179,18 +172,5 @@ var formData = "";
 		
 	}
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
