@@ -12,13 +12,9 @@ public class JSPViewResolver {
 		
 		String url = (String) req.getAttribute("viewName");
 		
-//		if (url == null) {
-//			return;
-//		}
-		
 		if (url.indexOf("redirect:") > -1) {
 			
-			String contextPath = req.getContentType();
+			String contextPath = req.getContextPath();
 			
 			url = contextPath + "/" + url.replace("redirect:", "");
 			

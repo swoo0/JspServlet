@@ -60,7 +60,6 @@ public class DispatcherServlet extends HttpServlet {
 				try {
 					view = action.process(req, resp);
 					
-					System.out.println(view);
 					if (view == null) {
 						return;
 					}

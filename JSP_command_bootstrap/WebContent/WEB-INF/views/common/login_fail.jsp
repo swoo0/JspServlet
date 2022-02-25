@@ -4,10 +4,7 @@
 
 <script>
 	
-	if ('${loginUser.name }') {
-		location.href="index.do";
-	} else {
-		location.href="common/loginForm.do";
-	}
+	alert('<%=request.getAttribute("message") %>');
+	location.href='<%=request.getContextPath() %>/common/loginForm.do';
 	
 </script>
