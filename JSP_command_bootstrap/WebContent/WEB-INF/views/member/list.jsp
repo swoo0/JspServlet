@@ -81,6 +81,7 @@
 	             <div class="col-sm-12">	
 		    		<table class="table table-bordered">
 		    			<tr>
+		                	<th>사진</th>
 		                	<th>아이디</th>
 		                	<th>패스워드</th>
 		                	<th>이 름</th>
@@ -100,6 +101,9 @@
 			     		<c:if test="${!empty memberList }">
 			     			<c:forEach items="${memberList }" var="member">
 		     					<tr onclick="OpenWindow('detail.do?id=${member.id }','','800','900');" style="cursor:pointer;">
+				     				<td>
+				     					<span class="manPicture" data-id="${member.id }" style="display:block; width:40px; height:30px; margin:0 auto;"></span>
+				     				</td>
 				     				<td>${member.id }</td>
 				     				<td>${member.pwd }</td>
 				     				<td>${member.name }</td>
@@ -123,5 +127,12 @@
 	     </div>
    	</section>
   </div>
+  
+<script>
+	window.onload = function() {
+		MemberPictureThumb('<%=request.getContextPath() %>');
+	}
+</script>  
+  
   
 </body>

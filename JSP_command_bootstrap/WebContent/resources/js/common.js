@@ -8,3 +8,24 @@ function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
 							+ winleft +", resizable=yes, status=yes"  );
 	win.focus() ; 
 }
+
+// 팝업창 닫기
+function CloseWindow() {
+	window.opener.location.reload(ture);
+	window.close();
+}
+ 
+// 사용자 사진 넣기
+function MemberPictureThumb(contextPath) { // (대상, 이미지 파일명)
+	
+	for(var target of document.querySelectorAll('.manPicture')) {
+	
+		var id = target.getAttribute('data-id');
+	
+		target.style.backgroundImage = "url('" + contextPath + "/member/getPicture.do?id=" + id + "')";
+		target.style.backgroundPosition = "center";
+		target.style.backgroundRepeat = "no-repeat";
+		target.style.backgroundSize = "cover";
+	
+	}
+}
