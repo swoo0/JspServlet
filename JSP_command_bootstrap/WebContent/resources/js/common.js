@@ -11,7 +11,7 @@ function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
 
 // 팝업창 닫기
 function CloseWindow() {
-	window.opener.location.reload(ture);
+	window.opener.location.reload(true);
 	window.close();
 }
  

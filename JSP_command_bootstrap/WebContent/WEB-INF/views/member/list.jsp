@@ -101,8 +101,8 @@
 			     		<c:if test="${!empty memberList }">
 			     			<c:forEach items="${memberList }" var="member">
 		     					<tr onclick="OpenWindow('detail.do?id=${member.id }','','800','900');" style="cursor:pointer;">
-				     				<td>
-				     					<span class="manPicture" data-id="${member.id }" style="display:block; width:40px; height:30px; margin:0 auto;"></span>
+				     				<td style="padding:3px; ">
+				     					<span class="manPicture" data-id="${member.id }" style="display:block; width:40px; height:40px; margin:0 auto;"></span>
 				     				</td>
 				     				<td>${member.id }</td>
 				     				<td>${member.pwd }</td>
