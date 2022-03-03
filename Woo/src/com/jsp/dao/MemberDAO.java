@@ -14,6 +14,10 @@ public interface MemberDAO {
 	List<MemberVO> selectMemberList(SqlSession session) throws Exception;
 	List<MemberVO> selectMemberList(SqlSession session, Criteria cri) throws Exception;
 	
+	// 일반 리스트 전체 개수
+	int selectMemberListCount(SqlSession session) throws Exception;
+	int selectMemberListCount(SqlSession session, Criteria cri) throws Exception;
+	
 	// 회원정보 조회
 	MemberVO selectMemberById(SqlSession session, String id) throws SQLException;
 	

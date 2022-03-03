@@ -6,11 +6,11 @@
 
 <c:set var="pageMaker" value="${dataMap.pageMaker }" />
 <c:set var="cri" value="${dataMap.pageMaker.cri }" />
-<c:set var="memberList" value="${dataMap.memberList }" />
+<c:set var="noticeList" value="${dataMap.noticeList }" />
 
 
 <!-- iframe에 쏴주기 때문에 title는 적어도 의미가 없음 -->
-<title>회원목록</title>
+<title>공지사항 목록</title>
 
 <head></head>
 
@@ -22,13 +22,13 @@
 	  	<div class="container-fluid">
 	  		<div class="row md-2">
 	  			<div class="col-sm-6">
-	  				<h1>회원목록</h1>  				
+	  				<h1>공지사항 목록</h1>  				
 	  			</div>
 	  			<div class="col-sm-6">
 	  				<ol class="breadcrumb float-sm-right">
 				        <li class="breadcrumb-item">
 				        	<a href="list.do">
-					        	<i class="fa fa-dashboard"></i>회원관리
+					        	<i class="fa fa-dashboard"></i>게시글 관리
 					        </a>
 				        </li>
 				        <li class="breadcrumb-item active">
@@ -44,7 +44,7 @@
    	<section class="content">
    		<div class="card">
    			<div class="card-header with-border">
-   				<button type="button" class="btn btn-primary" onclick="OpenWindow('registForm.do?cw=t','회원등록',800,800);" >회원등록</button>
+   				<button type="button" class="btn btn-primary" onclick="OpenWindow('registForm.do?cw=t','공지사항 등록',800,800);" >등록</button>
    				<div id="keyword" class="card-tools" style="width:550px;">
    					 <div class="input-group row">
    					 	<!-- search bar -->
@@ -60,9 +60,12 @@
 					  	<!-- search bar -->
 					 	<select class="form-control col-md-3" name="searchType" id="searchType">
 							<option value=""  ${cri.searchType eq '' ? 'selected':''}>검색구분</option>
-							<option value="i"  ${cri.searchType eq 'i' ? 'selected':''}>아이디</option>
-							<option value="p"  ${cri.searchType eq 'p' ? 'selected':''}>전화번호</option>
-							<option value="e"  ${cri.searchType eq 'e' ? 'selected':''}>이메일</option>
+							<option value="t"  ${cri.searchType eq 't' ? 'selected':''}>제목</option>
+							<option value="w"  ${cri.searchType eq 'w' ? 'selected':''}>작성자</option>
+							<option value="c"  ${cri.searchType eq 'c' ? 'selected':''}>내용</option>
+							<option value="tc"  ${cri.searchType eq 'tc' ? 'selected':''}>제목 & 내용</option>
+							<option value="cw"  ${cri.searchType eq 'cw' ? 'selected':''}>내용 & 작성자</option>
+							<option value="tcw"  ${cri.searchType eq 'tcw' ? 'selected':''}>제목 & 내용 & 작성자</option>
 						</select>
 	
 						<!-- keyword -->
@@ -76,41 +79,37 @@
    					 </div>
    				</div>   			
    			</div>
-   			<div class="card-body" style="text-align:center; height:76vh">
+   			<div class="card-body" style="text-align:center; height:80vh">
     		  <div class="row">
-	             <div class="col-sm-12">
+	             <div class="col-sm-12">	
 		    		<table class="table table-bordered">
 		    			<tr>
-		                	<th>사진</th>
-		                	<th>아이디</th>
-		                	<th>패스워드</th>
-		                	<th>이 름</th>
-		                	<th>이메일</th>
-		                	<th>전화번호</th>
+		                	<th>글 번호</th>
+		                	<th>제목</th>
+<!-- 		                	<th>내용</th> -->
+		                	<th>작성자</th>
+		                	<th>조회수</th>
 		                	<th>등록날짜</th> <!-- yyyy-MM-dd  -->
 		               	</tr>
 
-			     		<c:if test="${empty memberList }">
+			     		<c:if test="${empty noticeList }">
 			     			<tr>
-			     				<td colspan="7" class="text-center">
+			     				<td colspan="6" class="text-center">
 			     					해당 내용이 없습니다.
 			     				</td>
 			     			</tr>	
 			     		</c:if>
 		     			
-			     		<c:if test="${!empty memberList }">
-			     			<c:forEach items="${memberList }" var="member">
-		     					<tr onclick="OpenWindow('detail.do?id=${member.id }','','800','900');" style="cursor:pointer;">
-				     				<td style="padding:3px; ">
-				     					<span class="manPicture" data-id="${member.id }" style="display:block; width:40px; height:40px; margin:0 auto;"></span>
-				     				</td>
-				     				<td>${member.id }</td>
-				     				<td>${member.pwd }</td>
-				     				<td>${member.name }</td>
-				     				<td>${member.email }</td>
-				     				<td>${member.phone.replace('-','') }</td>
+			     		<c:if test="${!empty noticeList }">
+			     			<c:forEach items="${noticeList }" var="notice">
+		     					<tr onclick="OpenWindow('detail.do?id=${notice.nno }','','800','900');" style="cursor:pointer;">
+				     				<td>${notice.nno }</td>
+				     				<td style="max-width: 500px;">${notice.title }</td>
+<%-- 				     				<td>${notice.content }</td> --%>
+				     				<td>${notice.writer}</td>
+				     				<td>${notice.viewcnt }</td>
 				     				<td>
-				     					<fmt:formatDate value="${member.regDate }" pattern="yyyy-MM-dd" />
+				     					<fmt:formatDate value="${notice.regDate }" pattern="yyyy-MM-dd" />
 				     				</td>
 		     					</tr>
 			     			</c:forEach>
@@ -128,11 +127,9 @@
    	</section>
   </div>
   
-<script>
-	window.onload = function() {
-		MemberPictureThumb('<%=request.getContextPath() %>');
-	}
-</script>  
   
+<script>
+
+</script>  
   
 </body>

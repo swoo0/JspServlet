@@ -92,7 +92,7 @@
 
 			     		<c:if test="${empty memberList }">
 			     			<tr>
-			     				<td colspan="6" class="text-center">
+			     				<td colspan="7" class="text-center">
 			     					해당 내용이 없습니다.
 			     				</td>
 			     			</tr>	

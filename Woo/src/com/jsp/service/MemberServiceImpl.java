@@ -12,14 +12,12 @@ import com.jsp.dto.MemberVO;
 
 public class MemberServiceImpl implements MemberService {
 
-	private SqlSessionFactory sqlSessionFactory;
-	
+	protected SqlSessionFactory sqlSessionFactory;
 	public void setSqlSessionFactory (SqlSessionFactory sqlSessionFactory) {
 		this.sqlSessionFactory = sqlSessionFactory;
 	}
 	
-	private MemberDAO memberDAO;
-	
+	protected MemberDAO memberDAO;
 	public void setMemberDAO(MemberDAO memberDAO) {
 		this.memberDAO = memberDAO;
 	}

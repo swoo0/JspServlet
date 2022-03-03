@@ -10,6 +10,7 @@
 	<!-- Repository Layer -->
 	<bean id="menuDAO" class="com.jsp.dao.MenuDAOImpl" />
 	<bean id="memberDAO" class="com.jsp.dao.MemberDAOImpl" />
+	<bean id="noticeDAO" class="com.jsp.dao.NoticeDAOImpl" />
 	
 	<!-- Service Layer -->
 	<bean id="menuService" class="com.jsp.service.MenuServiceImpl">
@@ -30,6 +31,11 @@
 	<bean id="loginSearchMemberService" class="com.jsp.service.LoginSearchMemberServiceImpl">
 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
 		<property name="memberDAO" ref-value="memberDAO" />
+	</bean>
+	
+	<bean id="noticeService" class="com.jsp.service.NoticeServiceImpl" >
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
+		<property name="noticeDAO" ref-value="noticeDAO" />
 	</bean>
 	
 </beans>

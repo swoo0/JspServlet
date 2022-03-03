@@ -77,7 +77,7 @@
 							</div>
 
 							<div class="col-sm-3 text-center">
-								<button type="button" onclick="" id="deleteBtn" class="btn btn-danger">삭 제</button>
+								<button type="button" onclick="remove_go('${member.id }')" id="deleteBtn" class="btn btn-danger">삭 제</button>
 							</div>
 
 							<div class="col-sm-3 text-center">
@@ -114,6 +114,14 @@
 	function modifyForm_go(id) {
 		location.href= "modifyForm.do?id=" + id;
 	}
+	
+	function remove_go(id) {
+		if (confirm("정말 삭제 하시겠습니까?")) {
+			location.href='remove.do?id=' + id;
+		}
+		
+	}
+	
 	
 </script>
 

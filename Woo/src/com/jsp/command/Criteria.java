@@ -7,47 +7,47 @@ public class Criteria {
 	private String searchType = "";
 	private String keyword = "";
 	
-//	private int starowNum = 0;
+	private int startRowNum = 0;
 
 	public int getPage() {
 		return page;
 	}
-
 	public void setPage(int page) {
-		this.page = page;
+		if (page < 1) {
+			this.page = 1;
+		} else {
+			this.page = page;
+		}
+		setStartRowNum();
 	}
-
 	public int getPerPageNum() {
 		return perPageNum;
 	}
-
 	public void setPerPageNum(int perPageNum) {
-		this.perPageNum = perPageNum;
+		if (perPageNum < 1) {
+			this.perPageNum = 10;
+		} else {
+			this.perPageNum = perPageNum;
+		}
+		setStartRowNum();
 	}
-
 	public String getSearchType() {
 		return searchType;
 	}
-
 	public void setSearchType(String searchType) {
 		this.searchType = searchType;
 	}
-
 	public String getKeyword() {
 		return keyword;
 	}
-
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-
-//	public int getStarowNum() {
-//		return starowNum;
-//	}
-//
-//	public void setStarowNum(int starowNum) {
-//		this.starowNum = starowNum;
-//	}
-	
+	public int getStartRowNum() {
+		return startRowNum;
+	}
+	public void setStartRowNum() {
+		this.startRowNum = (this.page -1) * perPageNum;
+	}
 	
 }

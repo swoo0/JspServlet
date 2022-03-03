@@ -101,7 +101,6 @@ public class MemberModifyAction implements Action {
 			req.setAttribute("parentReload", true);
 			session.setAttribute("logtinUser", memberService.getMember(member.getId()));
 		}
-				
 		
 		
 		return url;
