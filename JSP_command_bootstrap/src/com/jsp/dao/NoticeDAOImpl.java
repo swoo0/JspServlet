@@ -44,13 +44,13 @@ public class NoticeDAOImpl implements NoticeDAO {
 
 	@Override
 	public int selectNoticeSequenceNextValue(SqlSession session) throws SQLException {
-		int seq_num=session.selectOne("Notice-Mapper.selectNoticeSequenceNextValue");
+		int seq_num = session.selectOne("Notice-Mapper.selectNoticeSequenceNextValue");
 		return seq_num;
 	}
 
 	@Override
 	public void insertNotice(SqlSession session, NoticeVO notice) throws SQLException {
-		System.out.println("dao:"+notice);
+		System.out.println("dao:" + notice);
 		session.update("Notice-Mapper.insertNotice",notice);
 		
 	}

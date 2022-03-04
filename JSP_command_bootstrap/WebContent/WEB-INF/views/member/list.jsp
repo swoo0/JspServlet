@@ -46,11 +46,11 @@
    			<div class="card-header with-border">
    				<button type="button" class="btn btn-primary" onclick="OpenWindow('registForm.do?cw=t','회원등록',800,800);" >회원등록</button>
    				<div id="keyword" class="card-tools" style="width:550px;">
-   					 <div class="input-group row">
-   					 	<!-- search bar -->
+   					<div class="input-group row" style="top:5px">
+   						<!-- search bar -->
    					 	
-   					 	<!-- sort num -->
-					  	<select class="form-control col-md-3" name="perPageNum" id="perPageNum" onchange="list_go(1);">
+   						<!-- sort num -->
+						<select class="form-control col-md-3" name="perPageNum" id="perPageNum" onchange="list_go(1);">
 					  		<option value="10" >정렬개수</option>
 					  		<option value="2" ${cri.perPageNum == 2 ? 'selected':''}>2개씩</option>
 					  		<option value="3" ${cri.perPageNum == 3 ? 'selected':''}>3개씩</option>
@@ -72,8 +72,8 @@
 								<i class="fa fa-fw fa-search"></i>
 							</button>
 						</span>
-					 <!-- end : search bar -->		
-   					 </div>
+					<!-- end : search bar -->		
+   					</div>
    				</div>   			
    			</div>
    			<div class="card-body" style="text-align:center; height:76vh">

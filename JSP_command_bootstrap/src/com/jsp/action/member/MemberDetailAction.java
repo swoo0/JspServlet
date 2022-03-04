@@ -19,10 +19,16 @@ public class MemberDetailAction implements Action {
 		String url = "member/detail";
 		
 		String id = req.getParameter("id");
+		String from = req.getParameter("from");
+		
 		try {
 			MemberVO member = memberService.getMember(id);
-			req.setAttribute("member",  member);
 
+			if (from != null && from.equals("list")) {
+				req.setAttribute("from", true);
+			}
+			
+			req.setAttribute("member", member);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

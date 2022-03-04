@@ -69,32 +69,35 @@
 						</div>
 					</div>
 					<div class="card-footer" style="padding: 5px 0;">
-						<div class="row">
-							<div class="col-sm-3 text-center">
-								<button type="button" id="modifyBtn" class="btn btn-warning" onclick="modifyForm_go('${member.id }');">수 정</button>
-									<%--style="display:${loginUser.id eq member.id ? 'visible':'none'} ;" --%>
-<!-- 									>수 정</button> -->
+						<div class="row" id="toolbar">
+						
+							<div id="isMemberList" style="display:none;">
+								<div class="col-sm-3 text-center">
+									<button type="button" id="modifyBtn" class="btn btn-warning" onclick="modifyForm_go('${member.id }');">수 정</button>
+										<%--style="display:${loginUser.id eq member.id ? 'visible':'none'} ;" --%>
+								</div>
+								<div class="col-sm-3 text-center">
+									<button type="button" onclick="remove_go('${member.id }')" id="deleteBtn" class="btn btn-danger">삭 제</button>
+								</div>
+								<div class="col-sm-3 text-center">
+									<c:if test="${member.enabled ne 0}">
+										<button type="button" onclick="location.href='enabled.do?id=${member.id }&enabled=0';" id="stopBtn" class="btn btn-info">비활성</button>
+									</c:if>
+									<c:if test="${member.enabled eq 0}">
+										<button type="button" onclick="location.href='enabled.do?id=${member.id }&enabled=1';" id="activeBtn" class="btn btn-info">활&nbsp;&nbsp;성</button>
+									</c:if>
+								</div>
+								<div class="col-sm-3 text-center">
+									<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-primary pull-right">닫 기</button>
+								</div>
 							</div>
-
-							<div class="col-sm-3 text-center">
-								<button type="button" onclick="remove_go('${member.id }')" id="deleteBtn" class="btn btn-danger">삭 제</button>
+							
+							<div id="isNotMemberList" style="display:none;">
+								<div class="col-sm-12 text-center">
+									<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-primary pull-right">닫 기</button>
+								</div>
 							</div>
-
-							<div class="col-sm-3 text-center">
-
-								<c:if test="${member.enabled ne 0}">
-									<button type="button" onclick="location.href='enabled.do?id=${member.id }&enabled=0';" id="stopBtn" class="btn btn-info">비활성</button>
-								</c:if>
-
-								<c:if test="${member.enabled eq 0}">
-									<button type="button" onclick="location.href='enabled.do?id=${member.id }&enabled=1';" id="activeBtn" class="btn btn-info">활&nbsp;&nbsp;성</button>
-								</c:if>
-
-							</div>
-
-							<div class="col-sm-3 text-center">
-								<button type="button" id="listBtn" onclick="CloseWindow();" class="btn btn-primary pull-right">닫 기</button>
-							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -105,10 +108,18 @@
 	<!-- /.content-wrapper -->
 
 
-	<script>
+<script>
 
 	window.onload = function() {
 		MemberPictureThumb('<%=request.getContextPath()%>');
+		
+//	 	alert(window.opener.location.href);
+		if (window.opener.location.href.indexOf('member/list') > -1) {
+			// alert("member/list 확인");
+			$('#toolbar').html($('div#isMemberList').html());
+		} else {
+			$('#toolbar').html($('div#isNotMemberList').html());
+		}
 	}
 	
 	function modifyForm_go(id) {
@@ -119,9 +130,7 @@
 		if (confirm("정말 삭제 하시겠습니까?")) {
 			location.href='remove.do?id=' + id;
 		}
-		
 	}
-	
 	
 </script>
 
