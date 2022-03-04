@@ -5,13 +5,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.connector.Response;
-
 import com.jsp.action.Action;
 import com.jsp.command.Criteria;
+import com.jsp.command.CriteriaCommand;
+import com.jsp.controller.HttpRequestParameterAdapter;
 import com.jsp.service.NoticeService;
 
-public class NoticeListAction implements Action {
+public class NoticeListAction implements Action{
 
 	private NoticeService noticeService;
 	public void setNoticeService(NoticeService noticeService) {
@@ -19,36 +19,31 @@ public class NoticeListAction implements Action {
 	}
 	
 	@Override
-	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		String url = "notice/list";
+	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String url = "/notice/list";
 		
-		String pageParam = req.getParameter("page");
-		String perPageNumParam = req.getParameter("perPageNum");
-		String searchTypeParam = req.getParameter("searchType");
-		String keywordParam = req.getParameter("keyword");
-		
-		Criteria cri = new Criteria();
-		cri.setSearchType(searchTypeParam);
-		cri.setKeyword(keywordParam);
+		try {
 
-		try {
-			if (pageParam != null && !pageParam.isEmpty()) cri.setPage(Integer.parseInt(pageParam));
-			if (perPageNumParam != null && !perPageNumParam.isEmpty()) cri.setPerPageNum(Integer.parseInt(perPageNumParam));
-		} catch (Exception e) {
-			resp.sendError(Response.SC_BAD_REQUEST);
-			return null;
-		}
-		
-		req.setAttribute("cri", cri);
-		
-		try {
+			CriteriaCommand criCMD 
+			= (CriteriaCommand)HttpRequestParameterAdapter.execute(request, CriteriaCommand.class);
+			
+			Criteria cri = criCMD.toCriteria();		
+			
 			Map<String, Object> dataMap = noticeService.getNoticeList(cri);
-			req.setAttribute("dataMap", dataMap);
-		} catch (Exception e) {
+			request.setAttribute("dataMap", dataMap);
+		}catch (Exception e) {			
 			e.printStackTrace();
-			throw e;
+			response.sendError(response.SC_BAD_REQUEST);
+			return null;
 		}
 		
 		return url;
 	}
+
 }
+
+
+
+
+
+
