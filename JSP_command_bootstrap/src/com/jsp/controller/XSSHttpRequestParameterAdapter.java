@@ -5,19 +5,19 @@ import java.lang.reflect.Method;
 import javax.servlet.http.HttpServletRequest;
 
 public class XSSHttpRequestParameterAdapter extends HttpRequestParameterAdapter {
-	
+
 	// 상속 받았지만 클래스가 다르기 때문에 오버로딩은 아니다.
-	public static Object execute(HttpServletRequest req, Class<?> className, boolean xss) throws Exception {
+	public static Object execute(HttpServletRequest request, Class<?> className, boolean xss) throws Exception {
 		
 		Object result = null;
 		
 		if (xss) {
-			XSSResolver.parseXSS(req);
-			
+			XSSResolver.parseXSS(request);
+
 			// 의존성 확인 및 조립
 			Method[] methods = className.getMethods();
 
-			// 인스턴스 성성
+			// 인스턴스 생성
 			result = className.newInstance();
 
 			// setter 확인
@@ -26,7 +26,7 @@ public class XSSHttpRequestParameterAdapter extends HttpRequestParameterAdapter 
 					String requestParamName = method.getName().replace("set", "");
 					requestParamName = (requestParamName.charAt(0) + "").toLowerCase() + requestParamName.substring(1);
 
-					String[] paramValues = (String[]) req.getAttribute("XSS" + requestParamName);
+					String[] paramValues = (String[]) request.getAttribute("XSS" + requestParamName);
 
 					if (paramValues != null && paramValues.length > 0) {
 						if (method.getParameterTypes()[0].isArray()) {
@@ -37,13 +37,10 @@ public class XSSHttpRequestParameterAdapter extends HttpRequestParameterAdapter 
 					}
 				}
 			}
-			
 		} else {
-			result = HttpRequestParameterAdapter.execute(req, className);
+			result = HttpRequestParameterAdapter.execute(request, className);
 		}
-		
-		
+
 		return result;
 	}
-	
 }

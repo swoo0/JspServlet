@@ -10,19 +10,26 @@ import com.josephoconnell.html.HTMLInputFilter;
 
 public class XSSResolver {
 
-	public static void parseXSS(HttpServletRequest req) throws IOException,ServletException {
+	public static void parseXSS(HttpServletRequest request) throws IOException, ServletException {
+		Enumeration<String> crossParamNames = request.getParameterNames();
 		
-		Enumeration<String> crossParamNames = req.getParameterNames();
-		
-		String paramName = crossParamNames.nextElement();
-		String[] paramValue = req.getParameterValues(paramName);
-		
-		System.out.println(paramName + ":" + paramValue.length);
-		if (paramValue != null) for (int i = 0; i < paramValue.length; i++) {
-			paramValue[i] = HTMLInputFilter.htmlSpecialChars(paramValue[i]);
+		while (crossParamNames.hasMoreElements()) {
+			
+			String paramName = crossParamNames.nextElement();
+			String[] paramValue = request.getParameterValues(paramName);
+			
+			System.out.println(paramName + " : " + paramValue.length);
+			
+			if (paramValue != null) {
+				for (int i = 0; i < paramValue.length; i++) {
+					paramValue[i] = HTMLInputFilter.htmlSpecialChars(paramValue[i]);
+				}
+			}
+			
+			request.setAttribute("XSS" + paramName, paramValue);
+		 
 		}
-		
-		req.setAttribute("XSS" + paramName, paramValue);
 	}
+	
 	
 }

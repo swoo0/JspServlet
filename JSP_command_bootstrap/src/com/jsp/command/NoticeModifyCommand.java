@@ -35,15 +35,12 @@ public class NoticeModifyCommand {
 	}
 	
 	public NoticeVO toNoticeVO() {
-		
 		NoticeVO notice = new NoticeVO();
-		
-		notice.setNno(Integer.parseInt(this.nno));
-		notice.setTitle(this.title);
-		notice.setContent(this.content);
-		notice.setWriter(this.writer);
+		notice.setNno(Integer.parseInt(nno));
+		notice.setContent(content);
+		notice.setWriter(writer);
+		notice.setTitle(title);
 		
 		return notice;
 	}
-	
 }

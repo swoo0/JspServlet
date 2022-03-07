@@ -77,16 +77,10 @@
   
 <script>
 	window.onload = function() {
-		$('textarea[name="content"]').summernote({
-			placeholder:'여기에 내용을 적으세요.',
-			lang:'ko-KR',
-			height:250,
-			disableResizeEditor:true			
-		});	
+		summernote_go($('textarea[name="content"]'), '<%=request.getContextPath() %>');
 	}
 </script>
-  
-    
+
 <script>
 	function regist_go() {
 // 		alert("regist btn click");

@@ -18,16 +18,17 @@ public class NoticeModifyAction implements Action {
 	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-		String url = "redirect:notice/detail.do?form=modify&nno=" + req.getParameter("nno");
+		String url = "redirect:notice/detail.do?from=modify&nno=" + req.getParameter("nno");
 		
 		NoticeModifyCommand noticeReq = (NoticeModifyCommand) XSSHttpRequestParameterAdapter.execute(req, NoticeModifyCommand.class, true);
 		
-		NoticeVO notice = noticeReq.toNoticeVO();
+		NoticeVO notice = noticeReq.toNoticeVO();				
 		
+		System.out.println(notice.getTitle());
+		System.out.println(notice.getContent());
 		noticeService.modify(notice);
 		
 		return url;
-		
 	}
-	
+
 }

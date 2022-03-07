@@ -52,4 +52,13 @@ public class Criteria {
 		this.startRowNum = (this.page - 1) * perPageNum;
 	}
 	
+	
+	public int getStartRow() {
+		return (this.page -1) * perPageNum;
+	}
+	public int getEndRow() {
+		return getStartRow() + perPageNum;
+	}
+	
+	
 }

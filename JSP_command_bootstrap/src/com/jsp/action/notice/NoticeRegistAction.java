@@ -21,6 +21,8 @@ public class NoticeRegistAction implements Action {
 		
 		NoticeVO notice = (NoticeVO) XSSHttpRequestParameterAdapter.execute(req, NoticeVO.class, true);
 		
+		notice.setContent(req.getParameter("content"));
+		
 		noticeService.regist(notice);
 		
 		return url;
