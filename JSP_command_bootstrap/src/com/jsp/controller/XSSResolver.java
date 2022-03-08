@@ -27,9 +27,7 @@ public class XSSResolver {
 			}
 			
 			request.setAttribute("XSS" + paramName, paramValue);
-		 
 		}
 	}
-	
 	
 }

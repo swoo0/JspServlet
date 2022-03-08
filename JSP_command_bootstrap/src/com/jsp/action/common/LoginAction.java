@@ -29,7 +29,7 @@ public class LoginAction implements Action {
 			
 			HttpSession session = req.getSession();
 			session.setAttribute("loginUser", loginSearchMemberService.getMember(id));
-			session.setMaxInactiveInterval(6 * 60);
+			session.setMaxInactiveInterval(6 * 60 * 10);
 			
 		} catch (IdNotFoundException | InvalidPasswordException e) {
 //			e.printStackTrace();

@@ -46,11 +46,3 @@ public class BoardModifyCommand {
 		return board;
 	}
 }
-
-
-
-
-
-
-
-

@@ -167,39 +167,8 @@ function remove_go(){
 }
 </script>
  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script type="text/x-handlerbars-template" id="reply-list-template">
-   {{#each .}}
-      <div class="replyLi" >
-         <div class="user-block">
-            <img src="<%=request.getContextPath()%>/member/getPicture.do?id={{replyer}}" class="img-circle img-bordered-sm"/>
-          </div>   
-      </div>
-   {{/each}}
-</script>
 
-<script>
-var replyPage = 1;
-
-window.onload = function() {
-    getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page=" + replyPage);
- }
-
-function getPage(pageInfo) {
-	$.getJSON(pageInfo, function(data) {
-		printData(data.replyList, $("#repliesDiv"), $("#reply-list-template"));
-	});
-}
-
-function printData(replyArr, target, templateObject) {
-    var template = Handlebars.compile(templateObject.html());   // function줌
-    var html = template(replyArr);   // 마크업 줌
-    $(".replyLi").remove();
-    target.after(html);
- }
-
-</script> 
- 
+<%@ include file="./reply_js.jsp" %>
  
 </body> 
  
