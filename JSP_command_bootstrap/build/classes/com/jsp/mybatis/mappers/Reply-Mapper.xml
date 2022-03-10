@@ -39,5 +39,23 @@
 		delete from reply
 		where rno = #{rno}		
 	</update>	
-
+	
+	
+	<select id="selectReplyListP" resultType="reply">
+		select *
+		from reply
+		where pno = #{pno}
+		order by rno asc
+	</select>
+	<select id="countReplyP" resultType="int">
+		select count(pno) 
+		from reply
+		where pno = #{pno}
+	</select>
+	
+	<update id="insertReplyP" >
+		insert into reply(rno,pno,replytext,replyer)
+		values(#{rno},#{pno},#{replytext},#{replyer})
+	</update>
+	
 </mapper>

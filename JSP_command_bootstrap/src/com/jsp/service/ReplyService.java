@@ -13,9 +13,11 @@ public interface ReplyService {
 	
 	// 리스트 개수
 	int getReplyListCount(int bno) throws SQLException;
+	int getReplyListCountP(int pno) throws SQLException;
 		
 	// 등록
 	void registReply(ReplyVO reply) throws SQLException;
+	void registReplyP(ReplyVO reply) throws SQLException;
 	
 	// 수정
 	void modifyReply(ReplyVO reply) throws SQLException;
@@ -24,4 +26,3 @@ public interface ReplyService {
 	void removeReply(int rno) throws SQLException;
 	
 }
- 

@@ -21,7 +21,7 @@ public class BoardModifyFormAction implements Action {
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		String url = "/board/modify";
+		String url = "/board/modifyForm";
 
 		try {
 			int bno = Integer.parseInt(request.getParameter("bno"));

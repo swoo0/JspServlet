@@ -24,8 +24,6 @@ public class NoticeModifyAction implements Action {
 		
 		NoticeVO notice = noticeReq.toNoticeVO();				
 		
-		System.out.println(notice.getTitle());
-		System.out.println(notice.getContent());
 		noticeService.modify(notice);
 		
 		return url;

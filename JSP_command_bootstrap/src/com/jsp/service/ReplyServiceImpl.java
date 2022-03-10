@@ -73,6 +73,7 @@ public class ReplyServiceImpl implements ReplyService {
 		}
 	}
 
+
 	@Override
 	public void registReply(ReplyVO reply) throws SQLException {
 		SqlSession session = sqlSessionFactory.openSession();
@@ -108,6 +109,63 @@ public class ReplyServiceImpl implements ReplyService {
 		} finally {
 			session.close();
 		}
+	}
+
+	
+	
+	
+	public Map<String, Object> getReplyListP(int pno, Criteria cri) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		
+		try {
+			List<ReplyVO> replyList = replyDAO.selectReplyListPage(session, pno, cri);
+			
+			if (replyList != null) for (ReplyVO reply : replyList) {
+				MemberVO member = memberDAO.selectMemberById(session, reply.getReplyer());
+				reply.setPicture(member.getPicture());
+			}
+			
+			int count = replyDAO.countReply(session, pno);
+			
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(count);
+			
+			dataMap.put("replyList", replyList);
+			dataMap.put("pageMaker", pageMaker);
+
+			return dataMap;
+		} finally {
+			session.close();
+		}
+	}
+	
+	@Override
+	public int getReplyListCountP(int pno) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+			int count = replyDAO.countReply(session, pno);
+			return count;
+		} finally {
+			session.close();
+		}
+	}
+	
+	@Override
+	public void registReplyP(ReplyVO reply) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		
+		try {
+			int rno = replyDAO.selectReplySeqNextValue(session);
+			reply.setRno(rno);
+			
+			replyDAO.insertReply(session, reply);
+		} finally {
+			session.close();
+		}
+		
 	}
 
 	

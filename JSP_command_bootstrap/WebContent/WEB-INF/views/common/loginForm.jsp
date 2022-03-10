@@ -51,4 +51,11 @@
 	<!-- /.login-box -->
 	
   </div>
+  
+  
+<script>
+window.onload = function() {
+	$('input[name="id"]').focus();
+}
+</script>
 </body>

@@ -51,6 +51,5 @@ public class ReplyDAOImpl implements ReplyDAO {
 		int count = session.selectOne("Reply-Mapper.countReply", bno);
 		return count;
 	}
-
 	
 }

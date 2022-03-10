@@ -19,8 +19,6 @@ public class ReplyRemoveAction implements Action {
 		this.replyService = replyService;
 	}
 	
-	
-	
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		String url = null;

@@ -6,6 +6,7 @@ public class ReplyVO {
 
 	private int rno; 			// 고유번호
 	private int bno;			// 게시글번호
+	private int pno;			// 게시글번호
 	private String replytext; 	// 댓글내용
 	private String replyer; 	// 작성자
 	private Date regdate; 		// 등록일
@@ -24,6 +25,12 @@ public class ReplyVO {
 	}
 	public void setBno(int bno) {
 		this.bno = bno;
+	}
+	public int getPno() {
+		return pno;
+	}
+	public void setPno(int pno) {
+		this.pno = pno;
 	}
 	public String getReplytext() {
 		return replytext;

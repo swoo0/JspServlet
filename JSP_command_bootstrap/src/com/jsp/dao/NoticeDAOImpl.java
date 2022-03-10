@@ -56,7 +56,7 @@ public class NoticeDAOImpl implements NoticeDAO {
 
 	@Override
 	public void insertNotice(SqlSession session, NoticeVO notice) throws SQLException {
-		System.out.println("dao:" + notice);
+//		System.out.println("dao:" + notice);
 		session.update("Notice-Mapper.insertNotice", notice);
 		
 	}
