@@ -5,6 +5,6 @@
 
 <script>
 	alert("삭제되었습니다.");
-	window.opener.location.reload();
 	window.close();
+	window.opener.location.reload();
 </script>

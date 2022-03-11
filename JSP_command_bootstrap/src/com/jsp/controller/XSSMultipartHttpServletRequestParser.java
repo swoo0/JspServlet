@@ -35,9 +35,4 @@ public class XSSMultipartHttpServletRequestParser extends MultipartHttpServletRe
 		return paramValues;
 	}
 	
-	
-	
-	
-	
-	
 }

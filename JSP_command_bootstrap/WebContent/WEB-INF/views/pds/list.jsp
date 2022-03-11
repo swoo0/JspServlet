@@ -26,8 +26,7 @@
     		<div class="row mb-2">
     			<div class="col-sm-6">
 	      			<h1>자료실</h1>
-	      		</div>	      		
-	    	
+	      		</div>
 	       		
 	       		<div class="col-sm-6">
 			      <ol class="breadcrumb float-sm-right">
@@ -86,7 +85,7 @@
 							<td>${pds.pno }</td>
 							<td id="boardTitle" style="text-align:left;max-width: 100px; overflow: hidden;
 										 white-space: nowrap; text-overflow: ellipsis;">
-								<a href="javascript:OpenWindow('detail.do?pno=${pds.pno }','상세보기',800,700);">
+								<a href="javascript:OpenWindow('detail.do?from=list&pno=${pds.pno }','상세보기',800,700);">
 									<span class="col-sm-12 ">${pds.title }</span>
 								</a>
 							</td>

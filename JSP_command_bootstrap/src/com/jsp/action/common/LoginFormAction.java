@@ -12,6 +12,4 @@ public class LoginFormAction implements Action {
 		String url = "common/loginForm";
 		return url;
 	}
-
-	
 }

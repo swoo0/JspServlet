@@ -20,7 +20,7 @@
 
 			<form action="<%=request.getContextPath() %>/common/login.do"	method="post">
 				<div class="form-group has-feedback">
-					<input type="text" class="form-control" name="id" placeholder="아이디를 입력하세요." value="${pastID }">
+					<input type="text" class="form-control" name="id" placeholder="아이디를 입력하세요." value="${pastID }" autofocus>
 					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
@@ -52,10 +52,5 @@
 	
   </div>
   
-  
-<script>
-window.onload = function() {
-	$('input[name="id"]').focus();
-}
-</script>
+
 </body>

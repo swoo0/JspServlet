@@ -83,26 +83,33 @@
 														<span class ="info-box-number">${attach.fileName }</span>
 													</div>
 												</div>
-											 </div>														
+											 </div>							
 										</c:forEach>
 									</div>
 								</div>				
 							</div>
 						</div>
-												
+
 					</div>
 					<div class="card-footer">
-						
-							<button type="button" id="modifyBtn" class="btn btn-warning" onclick="">Modify</button>						
-					    	<button type="button" id="removeBtn" class="btn btn-danger" onclick="">REMOVE</button>
-					   
+
+							<button type="button" id="modifyBtn" class="btn btn-warning" onclick="submit_go('modifyForm.do', '${pds.pno}');">Modify</button>						
+					    	<button type="button" id="removeBtn" class="btn btn-danger" onclick="submit_go('remove.do', '${pds.pno}');">REMOVE</button>
+
 					    <button type="button" id="listBtn" class="btn btn-primary" onclick="CloseWindow();">CLOSE </button>
-					</div>									
-				</div><!-- end card -->				
+					</div>
+				</div><!-- end card -->
 			</div><!-- end col-md-12 -->
-		</div><!-- end row  -->		
+		</div><!-- end row  -->
 		
     </section>
-    
+
+
+<script>
+function submit_go(url, pno) {
+	location.href = url + "?pno=" + pno;
+}
+
+</script> 
  
 </body>

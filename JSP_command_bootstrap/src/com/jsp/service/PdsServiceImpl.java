@@ -40,8 +40,6 @@ public class PdsServiceImpl implements PdsService {
 				for (PdsVO pds : pdsList)
 					addAttachList(session, pds);
 			
-			
-			
 			PageMaker pageMaker = new PageMaker();
 			pageMaker.setCri(cri);
 			pageMaker.setTotalCount(pdsDAO.selectPdsCriteriaTotalCount(session, cri));
@@ -56,12 +54,22 @@ public class PdsServiceImpl implements PdsService {
 		}
 	}
 
+	private void addAttachList(SqlSession session, PdsVO pds) throws SQLException {
+
+		if (pds == null) return;
+		int pno = pds.getPno();
+		List<AttachVO> attachList = attachDAO.selectAttachesByPno(session, pno);
+		
+		pds.setAttachList(attachList);
+	}
+	
 	@Override
 	public PdsVO getPds(int pno) throws SQLException {
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
 			PdsVO pds = pdsDAO.selectPdsByPno(session, pno);
-
+			addAttachList(session, pds);
+			
 			return pds;
 		} finally {
 			session.close();
@@ -83,7 +91,6 @@ public class PdsServiceImpl implements PdsService {
 					attach.setAttacher(pds.getWriter());
 					attachDAO.insertAttach(session, attach);
 				}
-			
 		} finally {
 			session.close();
 		}
@@ -94,7 +101,13 @@ public class PdsServiceImpl implements PdsService {
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
 			pdsDAO.updatePds(session, pds);
-
+			
+			if (pds.getAttachList() != null)
+				for (AttachVO attach : pds.getAttachList()) {
+					attach.setPno(pds.getPno());
+					attach.setAttacher(pds.getWriter());
+					attachDAO.insertAttach(session, attach);
+				}
 		} finally {
 			session.close();
 		}
@@ -105,7 +118,6 @@ public class PdsServiceImpl implements PdsService {
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
 			pdsDAO.deletePds(session, pno);
-
 		} finally {
 			session.close();
 		}
@@ -118,6 +130,8 @@ public class PdsServiceImpl implements PdsService {
 			PdsVO pds = pdsDAO.selectPdsByPno(session, pno);
 			pdsDAO.increaseViewCnt(session, pno);
 
+			addAttachList(session, pds);
+			
 			return pds;
 		} finally {
 			session.close();
@@ -127,23 +141,22 @@ public class PdsServiceImpl implements PdsService {
 	@Override
 	public AttachVO getAttachByAno(int ano) throws SQLException {
 		SqlSession session = sqlSessionFactory.openSession();
-		return null;
+		try {
+			AttachVO attach = attachDAO.selectAttachByAno(session, ano);
+			return attach;
+		} finally {
+			session.close();
+		}
 	}
 
 	@Override
 	public void removeAttachByAno(int ano) throws SQLException {
 		SqlSession session = sqlSessionFactory.openSession();
-		
-	}
-	
-	private void addAttachList(SqlSession session, PdsVO pds) throws SQLException {
-		
-		if (pds == null) return;
-		
-		int pno = pds.getPno();
-		List<AttachVO> attachList = attachDAO.selectAttachesByPno(session, pno);
-		
-		pds.setAttachList(attachList);
+		try {
+			attachDAO.deleteAttach(session, ano);
+		} finally {
+			session.close();
+		}
 	}
 	
 }

@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="Pds-Mapper">
+
 	<sql id="search">
 		<if test="searchType == 't'.toString()">
 			and title like '%'||#{keyword}||'%'			
@@ -98,6 +99,7 @@
 	<select id="selectPdsSeqNext" resultType="int">
 		select pds_seq.nextval as pno from dual
 	</select>
+	
 </mapper>  
 
 

@@ -62,7 +62,6 @@ public class PdsRegistAction implements Action{
 					attachList.add(attach);
 				}
 			}
-			
 		} catch (NotMultipartFormDataException e) {
 			resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			url = null;
