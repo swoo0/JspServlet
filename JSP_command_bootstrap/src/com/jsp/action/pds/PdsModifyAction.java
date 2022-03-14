@@ -30,13 +30,13 @@ public class PdsModifyAction implements Action {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		String url = "/pds/modify_success";
-	
+
 		try {
 			PdsVO pds = modifyAttaches(req, resp);
 			pdsService.modify(pds);
 
 			req.setAttribute("pds", pds);
-	
+
 		} catch (Exception e) {
 			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			url = null;
@@ -45,51 +45,54 @@ public class PdsModifyAction implements Action {
 
 		return url;
 	}
-	
+
 	// 업로드 파일 환경 설정
-	private static final int MEMORY_THRESHOLD = 1024 * 1024 * 3;  // 3MB
-	private static final int MAX_FILE_SIZE = 1024 * 1024 * 24;  // 40MB
-	private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 200;  // 200MB
-	
-	private PdsVO modifyAttaches(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, Exception {
+	private static final int MEMORY_THRESHOLD = 1024 * 1024 * 3; // 3MB
+	private static final int MAX_FILE_SIZE = 1024 * 1024 * 24; // 40MB
+	private static final int MAX_REQUEST_SIZE = 1024 * 1024 * 200; // 200MB
+
+	private PdsVO modifyAttaches(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException, ServletException, Exception {
 
 		PdsVO pds = null;
-		
-		XSSMultipartHttpServletRequestParser multi = new XSSMultipartHttpServletRequestParser(req, MEMORY_THRESHOLD, MAX_FILE_SIZE, MAX_REQUEST_SIZE); 
-		
+
+		XSSMultipartHttpServletRequestParser multi = new XSSMultipartHttpServletRequestParser(req, MEMORY_THRESHOLD,
+				MAX_FILE_SIZE, MAX_REQUEST_SIZE);
+
 		// 파일 삭제 및 DB삭제
 		String[] deleteFiles = multi.getParameterValues("deleteFile");
 		if (deleteFiles != null && deleteFiles.length > 0) {
 			for (String anoStr : deleteFiles) {
 				int ano = Integer.parseInt(anoStr);
 				AttachVO attach = pdsService.getAttachByAno(ano);
-				
+
 				String filePath = attach.getUploadPath() + File.separator + attach.getFileName();
 				File targetFile = new File(filePath);
-				
+
 				if (targetFile.exists()) {
-					targetFile.delete();  // 파일 삭제
+					targetFile.delete(); // 파일 삭제
 				}
-				pdsService.removeAttachByAno(ano);  // DB 삭제
+				pdsService.removeAttachByAno(ano); // DB 삭제
 			}
 		}
-		
+
 		// 추가된 파일 저장
 		FileItem[] fileItems = multi.getFileItems("uploadFile");
-		
+
 		String uploadPath = GetUploadPath.getUploadPath("pds.upload");
 		List<File> fileList = FileUploadResolver.fileUpload(fileItems, uploadPath);
-		
+
 		List<AttachVO> attachList = new ArrayList<AttachVO>();
-		if (fileList.size() > 0) for (File file : fileList) {
-			AttachVO attach = new AttachVO();
-			attach.setFileName(file.getName());
-			attach.setUploadPath(uploadPath);
-			attach.setFileType(file.getName().substring(file.getName().lastIndexOf(".") + 1));
-			
-			attachList.add(attach);
-		}
-		
+		if (fileList.size() > 0)
+			for (File file : fileList) {
+				AttachVO attach = new AttachVO();
+				attach.setFileName(file.getName());
+				attach.setUploadPath(uploadPath);
+				attach.setFileType(file.getName().substring(file.getName().lastIndexOf(".") + 1));
+
+				attachList.add(attach);
+			}
+
 		pds = new PdsVO();
 		pds.setPno(Integer.parseInt(multi.getParameter("pno")));
 		pds.setTitle(multi.getXSSParameter("title"));
@@ -98,32 +101,6 @@ public class PdsModifyAction implements Action {
 		pds.setAttachList(attachList);
 
 		return pds;
-		
+
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
