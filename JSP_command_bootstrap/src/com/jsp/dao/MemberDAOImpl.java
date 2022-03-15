@@ -13,6 +13,14 @@ import com.jsp.dto.MemberVO;
 
 public class MemberDAOImpl implements MemberDAO {
 
+	
+	@Override
+	public List<MemberVO> selectMemberList(SqlSession session) throws Exception {
+		List<MemberVO> memberList = session.selectList("Member-Mapper.selectMemberList");
+			
+		return memberList;
+	}
+	
 	@Override
 	public List<MemberVO> selectMemberList(SqlSession session, Criteria cri) throws Exception {
 		
@@ -22,13 +30,6 @@ public class MemberDAOImpl implements MemberDAO {
 		
 		List<MemberVO> memberList = session.selectList("Member-Mapper.selectSearchMemberList", cri, rowBounds);
 		
-		return memberList;
-	}
-	
-	@Override
-	public List<MemberVO> selectMemberList(SqlSession session) throws Exception {
-		List<MemberVO> memberList = session.selectList("Member-Mapper.selectMemberList");
-			
 		return memberList;
 	}
 	
