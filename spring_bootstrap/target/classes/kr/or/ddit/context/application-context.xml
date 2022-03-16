@@ -42,5 +42,31 @@
 		p:attachDAO-ref="attachDAO"
 		p:session-ref="sqlSession"
 	/>
+
+	<!-- service -->
+	<bean id="menuService" class="kr.or.ddit.service.MenuServiceImpl"
+		p:menuDAOBean-ref="menuDAOBean"
+	/>
+	<bean id="memberService" class="kr.or.ddit.service.MemberServiceImpl"
+		p:memberDAOBean-ref="memberDAOBean"
+	/>
+	<bean id="loginSearchMemberService" class="kr.or.ddit.service.MemberServiceImpl"
+		p:memberDAOBean-ref="memberDAOBean"
+	/>
+	<bean id="noticeService" class="kr.or.ddit.service.NoticeServiceImpl"
+		p:noticeDAOBean-ref="noticeDAOBean"
+	/>
+	<bean id="boardService" class="kr.or.ddit.service.BoardServiceImpl"
+		p:boardDAOBean-ref="boardDAOBean"
+		p:replyDAOBean-ref="replyDAOBean"
+	/>
+	<bean id="replyService" class="kr.or.ddit.service.ReplyServiceImpl"
+		p:replyDAOBean-ref="replyDAOBean"
+		p:memberDAOBean-ref="memberDAOBean"
+	/>
+	<bean id="pdsService" class="kr.or.ddit.service.PdsServiceImpl"
+		p:pdsDAOBean-ref="pdsDAOBean"
+		p:attachDAOBean-ref="attachDAOBean"
+	/>
 	
 </beans>
