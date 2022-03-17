@@ -4,7 +4,22 @@
 	xmlns:c="http://www.springframework.org/schema/c"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+
+	<!-- summernote Image Path -->
+	<bean id="imgPath" class="java.lang.String">
+		<constructor-arg value="${summernote.img}" />
+	</bean>
+
+	<!-- member.picture -->
+	<bean id="picturePath" class="java.lang.String">
+		<constructor-arg value="${member.picture.upload" />
+	</bean>
+
+	<!-- file upload -->
+	<bean id="fileUploadPath" class="java.lang.String">
+		<constructor-arg value="${pds.upload}" />
+	</bean>
+
 	<!-- Repository Layer -->
 	<bean id="menuDAO" class="com.jsp.dao.MenuDAOImpl" />
 	<bean id="memberDAO" class="com.jsp.dao.MemberDAOImpl" />
@@ -48,9 +63,6 @@
 		p:menuDAOBean-ref="menuDAOBean"
 	/>
 	<bean id="memberService" class="kr.or.ddit.service.MemberServiceImpl"
-		p:memberDAOBean-ref="memberDAOBean"
-	/>
-	<bean id="loginSearchMemberService" class="kr.or.ddit.service.MemberServiceImpl"
 		p:memberDAOBean-ref="memberDAOBean"
 	/>
 	<bean id="noticeService" class="kr.or.ddit.service.NoticeServiceImpl"

@@ -7,6 +7,9 @@
 <c:set var="pageMaker" value="${dataMap.pageMaker }" />
 <c:set var="cri" value="${dataMap.pageMaker.cri }" />
 <c:set var="memberList" value="${dataMap.memberList }" />
+<%-- <c:set var="pageMaker" value="${pageMaker }" /> --%>
+<%-- <c:set var="cri" value="${pageMaker.cri }" /> --%>
+<%-- <c:set var="memberList" value="${memberList }" /> --%>
 
 
 <!-- iframe에 쏴주기 때문에 title는 적어도 의미가 없음 -->
