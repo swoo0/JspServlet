@@ -117,10 +117,28 @@
 		if (window.opener.location.href.indexOf('member/list') > -1) {
 			// alert("member/list 확인");
 			$('#toolbar').html($('div#isMemberList').html());
-		} else {
-			$('#toolbar').html($('div#isNotMemberList').html());
-		}
+		} 
+		
+		<c:if test="${param.from eq 'modify'}">
+			alert("${member.name}님의 정보가 수정되었습니다.");
+			location.href = 'detail.do?id=${member.id}';
+			
+			if(${parentReload}) {
+				if (confirm('로그인 사용자의 정보가 수정되었습니다.\n현재 화면을 닫고 새로고침 하시겠습니까?')) {
+					window.close();
+					window.opener.parent.location.reload(true);
+				}
+			}
+		</c:if>
+		
+		<c:if test="${param.from eq 'remove'}">
+			alert("${removeMember.name}님의 정보가 삭제되었습니다.");
+			window.close();
+			window.opener.parent.location.reload(true);
+		</c:if>
 	}
+	
+	
 	
 	function modifyForm_go(id) {
 		location.href= "modifyForm.do?id=" + id;

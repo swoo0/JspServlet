@@ -26,7 +26,7 @@
 			        </li>
 			        <li class="breadcrumb-item active">
 			        	등록
-			        </li>		        
+			        </li>
 	    	  </ol>
 	  			</div>
 	  		</div>
