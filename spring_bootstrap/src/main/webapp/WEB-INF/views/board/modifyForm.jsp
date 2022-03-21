@@ -22,7 +22,7 @@
 	  				<ol class="breadcrumb float-sm-right">
 			        <li class="breadcrumb-item">
 			        	<a href="list.do">
-				        	<i class="fa fa-dashboard"></i>공지사항
+				        	<i class="fa fa-dashboard"></i>게시판
 				        </a>
 			        </li>
 			        <li class="breadcrumb-item active">

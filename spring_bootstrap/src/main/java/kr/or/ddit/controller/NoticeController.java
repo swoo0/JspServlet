@@ -15,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jsp.command.Criteria;
-import com.jsp.command.NoticeModifyCommand;
 import com.jsp.dto.NoticeVO;
 import com.jsp.service.NoticeService;
 
@@ -85,19 +84,30 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String modify(NoticeModifyCommand modifyReq, RedirectAttributes rttr) throws Exception {
+	public String modify(NoticeVO notice, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
 		String url = "redirect:/notice/detail.do";
 		
-		NoticeVO notice = (NoticeVO) modifyReq.toNoticeVO();
+//		notice.setTitle(HTMLInputFilter.htmlSpecialChars(notice.getTitle()));
+		notice.setTitle((String)req.getAttribute("XSStitle"));
 		
 		noticeService.modify(notice);
 
-		rttr.addAttribute("id", notice.getWriter());
-		rttr.addAttribute("from", "modify");
-		rttr.addFlashAttribute("id", notice.getWriter());
+		rttr.addAttribute("nno", notice.getNno());
+		rttr.addFlashAttribute("from", "modify");
 		
 		return url;
 	}
 	
+	@RequestMapping(value="/remove", method=RequestMethod.GET)
+	public String remove(int nno, RedirectAttributes rttr) throws Exception {
+		String url = "redirect:/notice/detail.do";
+		
+		noticeService.remove(nno);
+		
+		rttr.addAttribute("nno", nno);
+		rttr.addFlashAttribute("from", "remove");
+		
+		return url;
+	}
 	
 }

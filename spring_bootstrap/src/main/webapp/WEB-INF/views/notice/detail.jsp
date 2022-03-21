@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
     
 <head></head>
 
@@ -16,15 +17,15 @@
 	  			</div>
 	  			<div class="col-sm-6">
 	  				<ol class="breadcrumb float-sm-right">
-			        <li class="breadcrumb-item">
-			        	<a href="list.do">
-				        	<i class="fa fa-dashboard"></i>공지사항
-				        </a>
-			        </li>
-			        <li class="breadcrumb-item active">
-			        	상세
-			        </li>		        
-	    	  </ol>
+				        <li class="breadcrumb-item">
+				        	<a href="list.do">
+					        	<i class="fa fa-dashboard"></i>공지사항
+					        </a>
+				        </li>
+				        <li class="breadcrumb-item active">
+				        	상세
+				        </li>		        
+	    	  		</ol>
 	  			</div>
 	  		</div>
 	  	</div>
@@ -71,6 +72,7 @@
     </section>
     <!-- /.content -->
     
+    
 <script>
 	function modifyForm_go(nno) {
 		location.href = "modifyForm.do?nno=" + nno;
@@ -79,10 +81,19 @@
 	function remove_go(nno) {
 		location.href = "remove.do?nno=" + nno;
 	}
-
-
+	
+	<c:if test="${from eq 'modify' }">
+		alert("수정되었습니다.");
+	</c:if>
+	
+	<c:if test="${from eq 'remove' }">
+		alert("삭제되었습니다.");
+		window.close();
+		window.opener.location.reload();
+	</c:if>
 </script>
 
+	
 
 </body>
  

@@ -44,7 +44,7 @@
   
   
 <script>
-	function list_go(page,url) {
+	function list_go(page, url) {
 		if (!url) url = "list.do";
 		
 		var jobForm = $('#jobForm');

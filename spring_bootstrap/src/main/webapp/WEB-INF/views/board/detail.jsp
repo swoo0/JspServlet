@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <head>
 	<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap/plugins/summernote/summernote-bs4.min.css">
 </head>
@@ -44,7 +46,7 @@
 					<div class="card-header">
 						<h3 class="card-title">상세보기</h3>
 						<div class="card-tools">
-							<button type="button" id="modifyBtn" class="btn btn-warning" onclick="modify_go();">MODIFY</button>						
+							<button type="button" id="modifyBtn" class="btn btn-warning" onclick="modifyForm_go();">MODIFY</button>						
 						    <button type="button" id="removeBtn" class="btn btn-danger" onclick="remove_go();">REMOVE</button>
 						    <button type="button" id="listBtn" class="btn btn-primary" onclick="CloseWindow();">CLOSE</button>
 					    </div>
@@ -148,11 +150,11 @@
 
 
 <script>
-function modify_go(){
+function modifyForm_go(){
 	var formObj = $("form[role='form']");
 	formObj.attr({
 		'action':'modifyForm.do',
-		'method':'post'
+		'method':'get'
 	});
 	formObj.submit();
 }
@@ -165,8 +167,17 @@ function remove_go(){
 		formObj.submit();
 	}
 }
+	<c:if test = "${from eq 'modify' }">
+		alert("정상적으로 수정되었습니다.")
+	</c:if>
+	
+	<c:if test = "${from eq 'remove' }">
+		alert("삭제되었습니다.\n게시판 목록으로 이동합니다.")
+		window.close();
+		window.opener.location.reload();
+	</c:if>
 </script>
- 
+
 
 <%@ include file="./reply_js.jsp" %>
  

@@ -75,15 +75,14 @@
     </section>
     <!-- /.content -->
    
+   
    <script>
    	window.onload=function(){
 		summernote_go($('textarea[name="content"]'),'<%=request.getContextPath()%>');	
    	}   	
-   	
    </script>
    
    <script>
-
 		function regist_go(){
 			var form = document.registForm;
 			if(form.title.value==""){
