@@ -1,6 +1,5 @@
 package kr.or.ddit.controller;
 
-import java.sql.SQLException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,13 +44,8 @@ public class ReplyController {
 		Criteria cri = new Criteria();
 		cri.setPage(page);
 		
-		try {
-			Map<String, Object> dataMap = service.getReplyList(bno, cri);
-			entity  = new ResponseEntity<Map<String, Object>> (dataMap, HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<Map<String, Object>> (HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		Map<String, Object> dataMap = service.getReplyList(bno, cri);
+		entity  = new ResponseEntity<Map<String, Object>> (dataMap, HttpStatus.OK);
 		
 		return entity;
 	}
@@ -63,20 +57,15 @@ public class ReplyController {
 		
 		reply.setReplytext(HTMLInputFilter.htmlSpecialChars(reply.getReplytext()));
 		
-		try {
-			service.registReply(reply);
-			
-			Criteria cri = new Criteria();
-			
-			Map<String, Object> dataMap = service.getReplyList(reply.getBno(), cri);
-			PageMaker pageMaker = (PageMaker) dataMap.get("pageMaker");
-			int realEndPage = pageMaker.getRealEndPage();
-			
-			entity = new ResponseEntity<String> (realEndPage + "", HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String> (HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		service.registReply(reply);
+		
+		Criteria cri = new Criteria();
+		
+		Map<String, Object> dataMap = service.getReplyList(reply.getBno(), cri);
+		PageMaker pageMaker = (PageMaker) dataMap.get("pageMaker");
+		int realEndPage = pageMaker.getRealEndPage();
+		
+		entity = new ResponseEntity<String> (realEndPage + "", HttpStatus.OK);
 		
 		return entity;
 	}
@@ -89,17 +78,11 @@ public class ReplyController {
 		
 		reply.setRno(rno);
 		
-		try {
-			service.modifyReply(reply);
-			entity = new ResponseEntity<String>(HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		service.modifyReply(reply);
+		entity = new ResponseEntity<String>(HttpStatus.OK);
 		
 		return entity;
 	}
-	
 	
 	@RequestMapping(value = "/{bno}/{rno}/{page}", method = {RequestMethod.DELETE})
 	public ResponseEntity<String> remove(@PathVariable("bno") int bno, 
@@ -107,45 +90,20 @@ public class ReplyController {
 			   							 @PathVariable("page") int page) throws Exception {
 		ResponseEntity<String> entity = null;
 		
-		try {
-			service.removeReply(rno);
+		service.removeReply(rno);
 
-			Criteria cri = new Criteria();
-			
-			Map<String, Object> dataMap = service.getReplyList(bno, cri);
-			PageMaker pageMaker = (PageMaker) dataMap.get("pageMaker");
-			
-			int realEndPage = pageMaker.getRealEndPage();
-			if(page > realEndPage) {
-				page = realEndPage;
-			}
-			entity = new ResponseEntity<String> (""+page, HttpStatus.OK);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<String> (HttpStatus.INTERNAL_SERVER_ERROR);
+		Criteria cri = new Criteria();
+		
+		Map<String, Object> dataMap = service.getReplyList(bno, cri);
+		PageMaker pageMaker = (PageMaker) dataMap.get("pageMaker");
+		
+		int realEndPage = pageMaker.getRealEndPage();
+		if(page > realEndPage) {
+			page = realEndPage;
 		}
+		entity = new ResponseEntity<String> (""+page, HttpStatus.OK);
 		
 		return entity;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

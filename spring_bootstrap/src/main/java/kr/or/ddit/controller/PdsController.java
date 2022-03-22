@@ -3,7 +3,6 @@ package kr.or.ddit.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,17 +17,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.josephoconnell.html.HTMLInputFilter;
 import com.jsp.command.Criteria;
 import com.jsp.dto.AttachVO;
 import com.jsp.dto.PdsVO;
 import com.jsp.service.PdsService;
-import com.jsp.util.MakeFileName;
 
+import kr.or.ddit.command.PdsModifyCommand;
 import kr.or.ddit.command.PdsRegistCommand;
+import kr.or.ddit.util.GetAttachesByMultipartFileAdapter;
 
 @Controller
 @RequestMapping("/pds")
@@ -55,37 +55,20 @@ public class PdsController {
 	
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
-	public String regist(PdsRegistCommand pdsCMD, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
+	public String regist(PdsRegistCommand registCMD, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
 		String url = "redirect:/pds/list.do";
 		
-		PdsVO pds = pdsCMD.toPdsVO();
-		
-		List<MultipartFile> multiFiles = pdsCMD.getUploadFile();
-		List<AttachVO> attachList = new ArrayList<AttachVO>();
-		
+		// file저장 -> List<AttachVO>
 		String savePath = this.fileUploadPath;
-		if (multiFiles != null) for (MultipartFile multi : multiFiles) {
-			String fileName = MakeFileName.toUUIDFileName(multi.getOriginalFilename(), "$$");
-			File file = new File(savePath, fileName);
-			
-			file.mkdirs();
-			
-			multi.transferTo(file);
-			
-			AttachVO attach = new AttachVO();
-			attach.setFileName(fileName);
-			attach.setFileType(fileName.substring(fileName.lastIndexOf(".") + 1));
-			attach.setUploadPath(savePath);
-			
-			attachList.add(attach);
-		}
+		List<AttachVO> attachList = GetAttachesByMultipartFileAdapter.save(registCMD.getUploadFile(), savePath);
 		
+		// DB저장
+		PdsVO pds = registCMD.toPdsVO();
 		pds.setAttachList(attachList);
-		pdsCMD.setTitle((String) req.getAttribute("XSStitle"));
-		
-		// DB 저장
+		registCMD.setTitle((String) req.getAttribute("XSStitle"));
 		service.regist(pds);
 		
+		// output
 		rttr.addFlashAttribute("from", "regist");
 		
 		return url;
@@ -101,6 +84,17 @@ public class PdsController {
 			url = "redirect:/pds/detail.do?pno=" + pno;
 		} else {
 			pds = service.getPds(pno);
+		}
+		
+		// 파일명 재정의
+		if (pds != null) {
+			List<AttachVO> attachList = pds.getAttachList();
+			if (attachList != null) {
+				for (AttachVO attach : attachList) {
+					String fileName = attach.getFileName().split("\\$\\$")[1];
+					attach.setFileName(fileName);
+				}
+			}
 		}
 		
 		mnv.addObject("pds", pds);
@@ -141,27 +135,56 @@ public class PdsController {
 		
 		PdsVO pds = service.getPds(pno);
 		
+		// 파일명 재정의
+		if (pds != null) {
+			List<AttachVO> attachList = pds.getAttachList();
+			if (attachList != null) {
+				for (AttachVO attach : attachList) {
+					String fileName = attach.getFileName().split("\\$\\$")[1];
+					attach.setFileName(fileName);
+				}
+			}
+		}
+		
 		mnv.addObject("pds", pds);
 		mnv.setViewName(url);
 		
 		return mnv;
 	}
 	
-	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String modify(PdsVO pds, int ano, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
+	@RequestMapping(value = "/modify", method = RequestMethod.POST, produces = "text/plain;charset:utf-8")
+	public String modify(PdsModifyCommand modifyCMD, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
 		String url = "redirect:/pds/detail.do";
 		
+		// 파일 삭제
+		if (modifyCMD.getDeleteFile() != null && modifyCMD.getDeleteFile().length > 0) {
+			for (String anoStr : modifyCMD.getDeleteFile()) {
+				int ano = Integer.parseInt(anoStr);
+				AttachVO attach = service.getAttachByAno(ano);
+				
+				File deleteFile = new File(attach.getUploadPath(), attach.getFileName());
+				
+				if (deleteFile.exists()) {
+					deleteFile.delete();  // File삭제
+				}
+				service.removeAttachByAno(ano);  // DB삭제
+			}
+		}
 		
+		// 파일 저장
+		List<AttachVO> attachList = GetAttachesByMultipartFileAdapter.save(modifyCMD.getUploadFile(), fileUploadPath);
 		
-		
-		
-		
+		// PdsVO setting
+		PdsVO pds = modifyCMD.toPdsVO();
+		pds.setAttachList(attachList);
 		pds.setTitle((String) req.getAttribute("XSStitle"));
+//		pds.setTitle(HTMLInputFilter.htmlSpecialChars(pds.getTitle()));
 		
+		// DB 저장
 		service.modify(pds);
 		
-		rttr.addAttribute("pno", pds.getPno());
 		rttr.addFlashAttribute("from", "modify");
+		rttr.addAttribute("pno", pds.getPno());
 		
 		return url;
 	}
@@ -171,6 +194,18 @@ public class PdsController {
 	public String remove(int pno, RedirectAttributes rttr) throws Exception {
 		String url = "redirect:/pds/detail.do";
 		
+		// 파일 삭제
+		List<AttachVO> attachList = service.getPds(pno).getAttachList();
+		if (attachList != null) {
+			for (AttachVO attach : attachList) {
+				File target = new File(attach.getUploadPath(), attach.getFileName());
+				if (target.exists()) {
+					target.delete();
+				}
+			}
+		}
+		
+		// DB 삭제
 		service.remove(pno);
 		
 		rttr.addAttribute("pno", pno);

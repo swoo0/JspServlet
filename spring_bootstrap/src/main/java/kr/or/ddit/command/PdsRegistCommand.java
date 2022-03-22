@@ -11,7 +11,7 @@ public class PdsRegistCommand {
 	private String title;     // 제목 
 	private String content;   // 작성자
 	private String writer;    // 내용 
-	private List<MultipartFile> uploadFile; // 업로드 파일 배열
+	private List<MultipartFile> uploadFile; // 업로드파일
 	
 	public String getTitle() {
 		return title;
