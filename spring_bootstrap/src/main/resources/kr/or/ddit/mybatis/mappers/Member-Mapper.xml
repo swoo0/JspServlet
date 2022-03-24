@@ -50,6 +50,13 @@
 		where id is not null
 		<include refid="search" />
 	</select>
+
+	<select id="selectMemberByPicture" parameterType="str" resultType="member">
+		select
+		*
+		from member
+		where picture=#{picture}
+	</select>
 	
 	<select id="selectMemberById" parameterType="str" resultType="member">
 		select
@@ -57,6 +64,7 @@
 		from member
 		where id=#{id}
 	</select>
+	
 	<update id="insertMember" parameterType="member">
 		insert into 
 		member(id, pwd, email, phone,picture,name,authority)
@@ -87,5 +95,8 @@
 		set enabled=#{enabled}
 		where id=#{id}
 	</update>
+
+
+
 
 </mapper>

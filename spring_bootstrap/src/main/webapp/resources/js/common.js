@@ -83,8 +83,9 @@ function sendFile(file, el) {
 			alert(img_url);
 			$(el).summernote('editor.insertImage', img_url);
 		},
-		error : function() {
-			alert(file.name + " 업로드에 실패했습니다.");
+		error : function(error) {
+//			alert(file.name + " 업로드에 실패했습니다.");
+			AjaxErrorSecurityRedirectHandler(error.status)
 		}
 	});
 }
@@ -105,13 +106,26 @@ function deleteFile(src) {
 		success : function(res) {
 			console.log(res);
 		},
-		error : function() {
-			alert("이미지 삭제가 불가합니다.");
+		error : function(error) {
+//			alert("이미지 삭제가 불가합니다.");
+			AjaxErrorSecurityRedirectHandler(error.status)
 		}
 	});
 }
 
-
+// spring_security redirect loginForm
+function AjaxErrorSecurityRedirectHandler(status) {
+	if (status == "302") {
+		alert("세션이 만료되었습니다.\n로그인 하세요.");
+		location.reload();
+	} else if (status == "403") {
+		alert("권한이 유효하지 않습니다");
+		history.go(-1);
+	} else {
+		alert("시스템장애로 실행이 불가합니다.");
+		history.go(-1);
+	}
+}
 
 
 

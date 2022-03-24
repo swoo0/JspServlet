@@ -43,6 +43,15 @@ public class MemberDAOBeanImpl implements MemberDAOBean{
 	}
 
 	@Override
+	public MemberVO selectMemberByPicture(String picture) throws SQLException {
+		MemberVO member = null;
+		
+		member = session.selectOne("Member-Mapper.selectMemberByPicture", picture);
+		
+		return member;
+	}
+	
+	@Override
 	public MemberVO selectMemberById(String id) throws SQLException {		
 		return memberDAO.selectMemberById(session, id);
 	}
@@ -68,6 +77,7 @@ public class MemberDAOBeanImpl implements MemberDAOBean{
 	public void enabledMember(String id, int enabled) throws SQLException {
 		memberDAO.enabledMember(session, id, enabled);		
 	}
+
 	
 
 }

@@ -151,8 +151,9 @@ function replyRegist_go() {
 			getPage("<%=request.getContextPath()%>/replies/" + bno + "/" + data); // 리스트 출력
 			$('#newReplyText').val("");
 		},
-		error : function() {
-			alert('댓글 등록을 실패했습니다.');
+		error : function(error) {
+// 			alert('댓글 등록을 실패했습니다.');
+			AjaxErrorSecurityRedirectHandler(error.status)
 		}
 	});
 }
@@ -188,8 +189,9 @@ function replyModify_go() {
 			alert('수정되었습니다.');
 			getPage("<%=request.getContextPath()%>/replies/${board.bno}/" + replyPage);
 		},
-		error : function() {
-			alert('수정 실패했습니다.');	
+		error : function(error) {
+// 			alert('수정 실패했습니다.');
+			AjaxErrorSecurityRedirectHandler(error.status)	
 		},
 		complete : function() {
 			$('#modifyModal').modal('hide');
@@ -213,8 +215,9 @@ function replyRemove_go() {
 			getPage("<%=request.getContextPath()%>/replies/${board.bno}/" + page);
 			replyPage = page;
 		},
-		error : function() {
-			alert('삭제 실패했습니다.');
+		error : function(error) {
+// 			alert('삭제 실패했습니다.');
+			AjaxErrorSecurityRedirectHandler(error.status)
 		},
 		complete : function() {
 			$('#modifyModal').modal('hide');
