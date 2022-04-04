@@ -37,11 +37,14 @@ public class MemberController {
 	private ExceptionLoggerHelper exceptionLogger;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public void main() {}
+	public String main() {
+		String url = "member/main.open";
+		return url;
+	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(Criteria cri, HttpServletRequest req, ModelAndView mnv) throws SQLException {
-		String url = "member/list";
+		String url = "member/list.open";
 		
 		Map<String, Object> dataMap = null;
 		
@@ -63,7 +66,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/registForm", method = RequestMethod.GET)
-	public void registForm() {}
+	public String registForm() {
+		String url = "member/registForm.open";
+		return url;
+	}
 	
 	
 	@Resource(name = "picturePath")
@@ -83,7 +89,7 @@ public class MemberController {
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public String detail(String id, Model model) throws Exception {
-		String url = "member/detail";
+		String url = "member/detail.open";
 		
 		MemberVO member = memberService.getMember(id);
 		model.addAttribute("member", member);
@@ -92,15 +98,18 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/modifyForm", method = RequestMethod.GET)
-	public void modifyForm(String id, Model model) throws Exception {
+	public ModelAndView modifyForm(String id, ModelAndView mnv) throws Exception {
+		String url = "member/modifyForm.open";
 		
 		MemberVO member = memberService.getMember(id);
 		
 		String picture = MakeFileName.parseFileNameFromUUID(member.getPicture(), "\\$\\$");
 		member.setPicture(picture);
 		
-		model.addAttribute("member", member);
+		mnv.addObject("member", member);
+		mnv.setViewName(url);
 		
+		return mnv;
 	}
 	
 	private String savePicture(String oldPicture, MultipartFile multi) throws Exception {
@@ -194,21 +203,5 @@ public class MemberController {
 		
 		return url;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

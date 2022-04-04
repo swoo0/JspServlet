@@ -26,17 +26,27 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public void main() throws Exception {}
+	public String main() throws Exception {
+		String url = "notice/main.open";
+		return url;
+	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void list(Criteria cri, Model model) throws Exception {
+	public ModelAndView list(Criteria cri, ModelAndView mnv) throws Exception {
+		String url = "notice/list.open";
 		
 		Map<String, Object> dataMap = noticeService.getNoticeList(cri);
-		model.addAttribute("dataMap", dataMap);
+		mnv.addObject("dataMap", dataMap);
+		mnv.setViewName(url);
+		
+		return mnv;
 	}
 	
 	@RequestMapping(value = "/registForm", method = RequestMethod.GET)
-	public void registForm() {}
+	public String registForm() {
+		String url = "notice/registForm.open";
+		return url;
+	}
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String regist(NoticeVO notice, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
@@ -54,7 +64,7 @@ public class NoticeController {
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public ModelAndView detail(int nno, @RequestParam(defaultValue = "") String from,
 							   HttpServletRequest req, ModelAndView mnv) throws SQLException {
-		String url = "notice/detail";
+		String url = "notice/detail.open";
 		
 		NoticeVO notice = null;
 		
@@ -73,7 +83,7 @@ public class NoticeController {
 	
 	@RequestMapping(value = "/modifyForm", method = RequestMethod.GET)
 	public ModelAndView modifyForm(int nno, ModelAndView mnv) throws Exception {
-		String url = "notice/modifyForm";
+		String url = "notice/modifyForm.open";
 		
 		NoticeVO notice = noticeService.getNoticeForModify(nno);
 		

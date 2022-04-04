@@ -31,12 +31,15 @@ public class CommonController {
 //	LoginSeachMemberService loginSeachMemberService;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public void main() throws Exception {}
+	public String main() throws Exception {
+		String url = "main.open";
+		return url;
+	}
 	
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(@RequestParam(defaultValue = "M000000") String mCode, Model model) throws Exception {
-		String url = "common/indexPage";
+		String url = "common/indexPage.page";
 		
 		List<MenuVO> menuList = menuService.getMainMenuList();
 		MenuVO menu = menuService.getMenuByMcode(mCode);
@@ -61,7 +64,7 @@ public class CommonController {
 	
 	@RequestMapping(value = "/common/loginForm", method = RequestMethod.GET)
 	public String loginForm(@RequestParam(defaultValue = "") String error, HttpServletResponse resp) {
-		String url = "common/loginForm";
+		String url = "common/loginForm.open";
 		
 		if (error.equals("1")) {
 			resp.setStatus(302);
@@ -103,17 +106,6 @@ public class CommonController {
 		return url;
 	}
 */
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	@RequestMapping(value = "/subMenu", method = RequestMethod.GET)

@@ -24,11 +24,14 @@ public class BoardController {
 	private BoardService service;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public void main() throws Exception {}
+	public String main() throws Exception {
+		String url = "main.open";
+		return url;
+	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(Criteria cri, ModelAndView mnv) throws SQLException {
-		String url = "board/list";
+		String url = "board/list.open";
 		
 		Map<String, Object> dataMap = service.getBoardList(cri);
 		
@@ -39,7 +42,10 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/registForm", method = RequestMethod.GET)
-	public void registForm() throws Exception {}
+	public String registForm() throws Exception {
+		String url = "board/registForm.open";
+		return url;
+	}
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
 	public String regist(BoardVO board, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
@@ -56,7 +62,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public ModelAndView detail(int bno, String from, ModelAndView mnv) throws SQLException {
-		String url = "board/detail";
+		String url = "board/detail.open";
 		
 		BoardVO board = null;
 		if (from != null && from.equals("list")) {
@@ -75,7 +81,7 @@ public class BoardController {
 	
 	@RequestMapping(value = "modifyForm", method = RequestMethod.GET)
 	public ModelAndView modifyFrom(int bno, ModelAndView mnv) throws Exception {
-		String url = "board/modifyForm";
+		String url = "board/modifyForm.open";
 		
 		BoardVO board = service.getBoardForModify(bno);
 		

@@ -41,17 +41,27 @@ public class PdsController {
 	private String fileUploadPath;
 	
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public void main() throws Exception {}
+	public String main() throws Exception {
+		String url = "pds/main.open";
+		return url;
+	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void list(Criteria cri, Model model) throws Exception {
-			
+	public ModelAndView list(Criteria cri, ModelAndView mnv) throws Exception {
+		String url = "pds/list.open";	
+		
 		Map<String, Object> dataMap = service.getList(cri);
-		model.addAttribute("dataMap", dataMap);
+		mnv.addObject("dataMap", dataMap);
+		mnv.setViewName(url);
+		
+		return mnv;
 	}
 	
 	@RequestMapping(value = "/registForm", method = RequestMethod.GET)
-	public void registForm() throws Exception {}
+	public String registForm() throws Exception {
+		String url = "pds/registForm.open";
+		return url;
+	}
 	
 	
 	@RequestMapping(value = "/regist", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
@@ -76,7 +86,7 @@ public class PdsController {
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public ModelAndView detail(int pno, String from, ModelAndView mnv) throws Exception {
-		String url = "pds/detail";
+		String url = "pds/detail.open";
 		
 		PdsVO pds = null;
 		if (from != null && from.equals("list")) {
@@ -131,7 +141,7 @@ public class PdsController {
 	
 	@RequestMapping(value = "/modifyForm", method = RequestMethod.GET)
 	public ModelAndView modifyForm(int pno, ModelAndView mnv) throws Exception {
-		String url = "pds/modifyForm";
+		String url = "pds/modifyForm.open";
 		
 		PdsVO pds = service.getPds(pno);
 		
@@ -214,7 +224,18 @@ public class PdsController {
 		return url;
 	}
 	
-	
+	@RequestMapping("/getFile")
+	public String getFile(int ano, Model model) throws Exception {
+		
+		String url = "downloadFile";
+		
+		AttachVO attach = service.getAttachByAno(ano);
+		
+		model.addAttribute("savedPath", attach.getUploadPath());
+		model.addAttribute("fileName", attach.getFileName());
+		
+		return url;
+	}
 	
 	
 	
